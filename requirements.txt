@@ -22,7 +22,6 @@ cffi
 chardet
 charset-normalizer
 click==8.1.7
-clyent==1.2.2
 colorama
 colorlog==6.7.0
 conda
