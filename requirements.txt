@@ -78,7 +78,6 @@ multiprocess==0.70.12.2
 nbformat
 numba==0.58.1
 numpy
-os
 onnx==1.14.1
 openai-whisper==20230918
 opencv-python==4.8.0.76
