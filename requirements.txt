@@ -28,6 +28,7 @@ contourpy==1.1.0
 cryptography
 cycler==0.11.0
 datasets==2.14.4
+datetime
 decorator==5.1.1
 defusedxml
 dill==0.3.4
@@ -77,6 +78,7 @@ multiprocess==0.70.12.2
 nbformat
 numba==0.58.1
 numpy
+os
 onnx==1.14.1
 openai-whisper==20230918
 opencv-python==4.8.0.76
@@ -147,6 +149,8 @@ soupsieve
 starlette==0.27.0
 streamlit==1.27.2
 streamlit-on-Hover-tabs==1.0.1
+streamlit_card
+streamlit_elements
 tenacity==8.2.3
 threadpoolctl==3.2.0
 tiktoken==0.3.3
