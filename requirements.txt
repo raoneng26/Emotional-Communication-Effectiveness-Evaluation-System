@@ -107,6 +107,8 @@ pydantic==2.3.0
 pydantic_core==2.6.3
 pydeck==0.8.1b0
 pydub==0.25.1
+pyecharts
+pyecharts.charts
 Pygments==2.16.1
 PyJWT
 pyOpenSSL
