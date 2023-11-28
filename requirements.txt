@@ -172,6 +172,7 @@ Werkzeug==2.3.7
 win-inet-pton
 wincertstore==0.2
 xxhash==3.3.0
+xlrd
 yarg==0.1.9
 yarl==1.9.2
 zipp==3.17.0
