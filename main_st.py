@@ -13,7 +13,6 @@ import pandas as pd
 from test import analysis
 from streamlit_card import card as st_card
 from streamlit_elements import elements, mui, html
-import V2EM_prediction.main_for_st
 from streamlit_echarts import st_echarts
 import os
 from datetime import datetime,timedelta
@@ -495,60 +494,60 @@ def main():
                     for j in range(0, ln):
                         st.write(str(j) + ': ' + st.session_state.title_N[j])
 
-        with col2:
-            with st.expander("媒介风格分析",True):
-                if st.session_state.name!=None:
-                    warn=st.empty()
-                    warn.warning(st.session_state.name)
-                    if "的微博视频" in st.session_state.name:
-                        if'卫星观地球'in st.session_state.name:
-                            video_path=r'data_weibo\日本核污水排放\video\1.mp4'    
-                        if'难舍深蓝'in st.session_state.name:
-                            video_path=r'data_weibo\日本核污水排放\video\2.mp4'    
-                        if'经济过热'in st.session_state.name:
-                            video_path=r'data_weibo\疫情后的经济\video\1.mp4'
-                        if'德国联邦议院'in st.session_state.name:
-                            video_path=r'data_weibo\疫情后的经济\video\2.mp4'
-                        if'墨染诗婳'in st.session_state.name:
-                            video_path=r'data_weibo\日本核污水排放\video\9.mp4'    
+        # with col2:
+        #     with st.expander("媒介风格分析",True):
+        #         if st.session_state.name!=None:
+        #             warn=st.empty()
+        #             warn.warning(st.session_state.name)
+        #             if "的微博视频" in st.session_state.name:
+        #                 if'卫星观地球'in st.session_state.name:
+        #                     video_path=r'data_weibo\日本核污水排放\video\1.mp4'    
+        #                 if'难舍深蓝'in st.session_state.name:
+        #                     video_path=r'data_weibo\日本核污水排放\video\2.mp4'    
+        #                 if'经济过热'in st.session_state.name:
+        #                     video_path=r'data_weibo\疫情后的经济\video\1.mp4'
+        #                 if'德国联邦议院'in st.session_state.name:
+        #                     video_path=r'data_weibo\疫情后的经济\video\2.mp4'
+        #                 if'墨染诗婳'in st.session_state.name:
+        #                     video_path=r'data_weibo\日本核污水排放\video\9.mp4'    
 
-                        result_emotion="result.txt"
-                        file_modality="C:/Users/86187/Desktop/新闻策划与效果评估系统/情感传播效果评估子系统/result_modality.csv"
+        #                 result_emotion="result.txt"
+        #                 file_modality="C:/Users/86187/Desktop/新闻策划与效果评估系统/情感传播效果评估子系统/result_modality.csv"
                         
-                    col_video,col_charts=st.columns([1,1])                
+        #             col_video,col_charts=st.columns([1,1])                
 
-                    if video_path !=" ":
-                        other_video=st.empty()
-                        with col_video:
-                            file_video=st.empty()
-                            file_video.video(video_path) # 更改点                                
+        #             if video_path !=" ":
+        #                 other_video=st.empty()
+        #                 with col_video:
+        #                     file_video=st.empty()
+        #                     file_video.video(video_path) # 更改点                                
 
-                        with col_charts:                           
-                            base_name = os.path.basename(video_path)
-                            fn = os.path.splitext(base_name)[0]
-                            try:
-                                V2EM_prediction.main_for_st.emotion_analysis(str(fn)) 
-                                the_chart=st.selectbox('',('情绪极性','各模态细粒度分析'))
-                                if the_chart=='情绪极性':
-                                    analysis('单视频情绪极性',result_emotion)
-                                if the_chart=='各模态细粒度分析':
-                                    analysis('单视频模态细粒度',file_modality)
-                            except:
-                                warn.error('该视频多模态情感分析失效，尝试上传其他视频（失效原因：视频中未出现人脸或出现多个人脸）')
-                                file_video.empty()
-                                uploaded_video = other_video.file_uploader('  ')
-                                if uploaded_video is not None:
-                                    warn.success('上传成功！')
-                                    other_video.empty()
-                                    fn = uploaded_video.name.split('.')[0]
-                                    mp4_path = f'D:/电磁辐射网络舆情分析系统/code/data_weibo/日本核污水排放/video/{fn}.mp4'
-                                    file_video.video(mp4_path)
-                                    V2EM_prediction.main_for_st.emotion_analysis(str(fn)) 
-                                    the_chart=st.selectbox('',('情绪极性','各模态细粒度分析'))
-                                    if the_chart=='情绪极性':
-                                        analysis('单视频情绪极性',result_emotion)
-                                    if the_chart=='各模态细粒度分析':
-                                        analysis('单视频模态细粒度',file_modality)
+        #                 with col_charts:                           
+        #                     base_name = os.path.basename(video_path)
+        #                     fn = os.path.splitext(base_name)[0]
+        #                     try:
+        #                         V2EM_prediction.main_for_st.emotion_analysis(str(fn)) 
+        #                         the_chart=st.selectbox('',('情绪极性','各模态细粒度分析'))
+        #                         if the_chart=='情绪极性':
+        #                             analysis('单视频情绪极性',result_emotion)
+        #                         if the_chart=='各模态细粒度分析':
+        #                             analysis('单视频模态细粒度',file_modality)
+        #                     except:
+        #                         warn.error('该视频多模态情感分析失效，尝试上传其他视频（失效原因：视频中未出现人脸或出现多个人脸）')
+        #                         file_video.empty()
+        #                         uploaded_video = other_video.file_uploader('  ')
+        #                         if uploaded_video is not None:
+        #                             warn.success('上传成功！')
+        #                             other_video.empty()
+        #                             fn = uploaded_video.name.split('.')[0]
+        #                             mp4_path = f'D:/电磁辐射网络舆情分析系统/code/data_weibo/日本核污水排放/video/{fn}.mp4'
+        #                             file_video.video(mp4_path)
+        #                             V2EM_prediction.main_for_st.emotion_analysis(str(fn)) 
+        #                             the_chart=st.selectbox('',('情绪极性','各模态细粒度分析'))
+        #                             if the_chart=='情绪极性':
+        #                                 analysis('单视频情绪极性',result_emotion)
+        #                             if the_chart=='各模态细粒度分析':
+        #                                 analysis('单视频模态细粒度',file_modality)
           
 
             if st.session_state.file_in != " ":
