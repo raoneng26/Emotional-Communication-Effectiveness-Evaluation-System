@@ -24,15 +24,6 @@ charset-normalizer
 click==8.1.7
 colorama
 colorlog==6.7.0
-conda
-conda-build==3.24.0
-conda-content-trust
-conda-pack
-conda-package-handling
-conda-repo-cli==1.0.41
-conda-token
-conda-verify==3.4.2
-conda_package_streaming
 contourpy==1.1.0
 cryptography
 cycler==0.11.0
