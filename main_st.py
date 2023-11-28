@@ -494,7 +494,7 @@ def main():
                     for j in range(0, ln):
                         st.write(str(j) + ': ' + st.session_state.title_N[j])
 
-        # with col2:
+        with col2:
         #     with st.expander("媒介风格分析",True):
         #         if st.session_state.name!=None:
         #             warn=st.empty()
