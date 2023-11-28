@@ -127,7 +127,6 @@ regex==2023.10.3
 requests==2.27.1
 requests-toolbelt
 rich==13.5.2
-ruamel-yaml-conda
 ruamel.yaml
 ruamel.yaml.clib
 safetensors==0.3.3
