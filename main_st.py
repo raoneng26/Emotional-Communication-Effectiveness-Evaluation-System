@@ -7,8 +7,6 @@ from streamlit.web import cli as stcli
 import random
 import time
 import base64
-from pyecharts.charts import Map
-from pyecharts import options as opts
 from streamlit.components.v1 import html
 import numpy as np
 import pandas as pd
