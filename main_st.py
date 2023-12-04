@@ -179,11 +179,11 @@ def report_show():
                 </style>''',unsafe_allow_html=True)
     reportpath1='report.jpg' # -----------------更改点--------------
     reporturl=st.session_state.url_pdf
-    # if "疫情" in st.session_state.file_in.name:
-    #     reporturl=r"https://shimo.im/file/ZzkLMeKnJ7cyPMAQ/"# -----------------更改点--------------
+    if "疫情" in st.session_state.file_in.name:
+        reporturl=r"https://shimo.im/file/ZzkLMeKnJ7cyPMAQ/"# -----------------更改点--------------
         
-    # if "日本" in st.session_state.file_in.name:
-    #     reporturl=r"https://shimo.im/file/m8AZMmW044Sx5xkb"
+    if "日本" in st.session_state.file_in.name:
+        reporturl=r"https://shimo.im/file/m8AZMmW044Sx5xkb"
     with open(reportpath1, "rb") as f:
         data = f.read()
         encoded = base64.b64encode(data)
