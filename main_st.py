@@ -370,7 +370,7 @@ def main():
                 if '疫情'in keyword:
                     file_clean="微博疫情后的经济数据\clean-微博疫情后的经济数据.csv"  # ------------------------更改点------------------------------
                     downloadfile_name="clean-微博疫情后的经济数据.csv"
-                    file_path="微博"
+                    file_path="微博疫情后的经济数据"
 
                 path=file_path
                 # 对字典进行排序
