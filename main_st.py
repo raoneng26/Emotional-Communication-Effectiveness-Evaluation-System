@@ -16,6 +16,9 @@ from streamlit_elements import elements, mui, html
 from streamlit_echarts import st_echarts
 import os
 from datetime import datetime,timedelta
+from docxtpl import DocxTemplate
+from docx2pdf import convert
+import requests
 
 def initial():
     global keyword
@@ -104,6 +107,39 @@ def set_background(png_file):  # 设置背景图
     st.markdown(page_bg_img, unsafe_allow_html=True)
 
 
+def upload_file_to_0x0(file_path):
+    """上传文件到0x0并返回URL"""
+    with open(file_path, 'rb') as f:
+        response = requests.post('https://0x0.st', files={'file': f})
+    if response.status_code == 200:
+        return response.text.strip()
+    else:
+        return None
+    
+
+def normalize_location_names(locations):
+    provinces = ['河南', '江苏', '山西', '福建', '四川', '海南', '吉林', '安徽', '浙江', '陕西', '黑龙江', '广东',  '河北', '山东', '辽宁', '云南', '湖北', '江西', '湖南', '甘肃', '贵州','青海','台湾']
+    municipalities = ['天津', '重庆', '北京', '上海']
+    special_administrative_regions = ['香港', '澳门']
+    autonomous_regions = {'新疆': '新疆维吾尔自治区','内蒙古': '内蒙古自治区','西藏': '西藏自治区','宁夏': '宁夏回族自治区','广西': '广西壮族自治区'}
+    others = ['其他']
+    all_locations = provinces + municipalities + list(autonomous_regions.keys()) + special_administrative_regions + others
+    new_locations = {}
+    for location in locations.keys():
+        if location in all_locations:
+            if location in provinces:
+                new_locations[location + "省"] = locations[location]
+            elif location in municipalities:
+                new_locations[location + "市"] = locations[location]
+            elif location in special_administrative_regions:
+                new_locations[location + "特别行政区"] = locations[location]
+            elif location in autonomous_regions:
+                new_locations[autonomous_regions[location]] = locations[location]
+            else:
+                new_locations[location] = locations[location]
+    return new_locations
+
+
 def report_show():
     st.markdown(r'''<style>
                     .box {
@@ -142,11 +178,12 @@ def report_show():
                     } 
                 </style>''',unsafe_allow_html=True)
     reportpath1='report.jpg' # -----------------更改点--------------
-    if "疫情" in st.session_state.file_in.name:
-        reporturl=r"https://shimo.im/file/ZzkLMeKnJ7cyPMAQ/"# -----------------更改点--------------
+    reporturl=st.session_state.url_pdf
+    # if "疫情" in st.session_state.file_in.name:
+    #     reporturl=r"https://shimo.im/file/ZzkLMeKnJ7cyPMAQ/"# -----------------更改点--------------
         
-    if "日本" in st.session_state.file_in.name:
-        reporturl=r"https://shimo.im/file/m8AZM4oemaF1bakb/"
+    # if "日本" in st.session_state.file_in.name:
+    #     reporturl=r"https://shimo.im/file/m8AZMmW044Sx5xkb"
     with open(reportpath1, "rb") as f:
         data = f.read()
         encoded = base64.b64encode(data)
@@ -260,6 +297,8 @@ def match_url(dict_, csv_file):
 
 def main():
     initial()
+    st.session_state.style="标准情绪值"
+
     # st.session_state.file_in=" "
     # st.session_state.file_out=" "
     st.set_page_config(layout="wide")
@@ -324,15 +363,89 @@ def main():
                     </html>
                 ''',unsafe_allow_html=True)
                 if '日本'in keyword:
-                    file_clean="clean-微博副本数据——核污水.csv"  # ------------------------更改点------------------------------
+                    file_clean="微博日本核污水排放数据\clean-微博日本核污水排放数据.csv"  # ------------------------更改点------------------------------
+                    downloadfile_name="clean-微博日本核污水排放数据.csv"
+                    file_path="微博日本核污水排放数据"
 
                 if '疫情'in keyword:
-                    file_clean="clean-微博副本数据——疫情.csv"  # ------------------------更改点------------------------------
+                    file_clean="微博疫情后的经济数据\clean-微博疫情后的经济数据.csv"  # ------------------------更改点------------------------------
+                    downloadfile_name="clean-微博疫情后的经济数据.csv"
+                    file_path="微博"
 
+                path=file_path
+                # 对字典进行排序
+                with open(path+"/map_result.txt",  encoding='utf-8') as file1: 
+                    str1 = file1.read()  # 读取文件内容
+                    dic = eval("{" + str1 + "}")
+                dic1=normalize_location_names(dic)
+                positive_items = sorted([(k, v) for k, v in dic1.items() if v > 0], key=lambda x: x[1], reverse=True)
+                negative_items = sorted([(k, v) for k, v in dic1.items() if v < 0], key=lambda x: x[1])
+                # 获取前两个最大的正值和负值
+                top_2_positive = positive_items[:2] if positive_items else [("无", "")]
+                top_2_negative = negative_items[:2] if negative_items else [("无", "")]
+                # 格式化为字符串
+                positive_str = ", ".join(["{}({})".format(k, v) for k, v in top_2_positive]) if positive_items else "无"
+                negative_str = ", ".join(["{}({})".format(k, v) for k, v in top_2_negative]) if negative_items else "无"
+                print("正值最大的前两个地点和值：", positive_str)
+                print("负值最大的前两个地点和值：", negative_str)
+                # 读取dp字典
+                with open(path + '/dp_result.txt', 'r', encoding='utf-8') as f:
+                    dp = eval("{" + f.read() + "}")
+                # 读取dz字典
+                with open(path + '/dz_result.txt', 'r', encoding='utf-8') as f:
+                    dz = eval("{" + f.read() + "}")
+                # 读取dn字典
+                with open(path + '/dn_result.txt', 'r', encoding='utf-8') as f:
+                    dn = eval("{" + f.read() + "}")
+                # 找到数量最多的日期和数量
+                max_dp_date, max_dp_count = max(dp.items(), key=lambda x: x[1])
+                max_dz_date, max_dz_count = max(dz.items(), key=lambda x: x[1])
+                max_dn_date, max_dn_count = max(dn.items(), key=lambda x: x[1])
+                print("正面数量最多的日期和数量：", max_dp_date, max_dp_count)
+                print("中性数量最多的日期和数量：", max_dz_date, max_dz_count)
+                print("负面数量最多的日期和数量：", max_dn_date, max_dn_count)
+                dp_str ="{}({})".format(max_dp_date,max_dp_count)
+                dz_str ="{}({})".format(max_dz_date,max_dz_count)
+                dn_str ="{}({})".format(max_dn_date,max_dn_count)
+                print(dp_str,dz_str,dn_str)
+                # 获取所有的日期（键）
+                dates = set(dp.keys()) | set(dz.keys()) | set(dn.keys())
+                # 找到最早和最晚的日期
+                earliest_date = min(dates)
+                latest_date = max(dates)
+                print("最早的日期：", earliest_date)
+                print("最晚的日期：", latest_date)
+                # 加载模板
+                doc = DocxTemplate(path+"\测试报告.docx")
+                # 创建一个字典，其中的键对应模板中的占位符
+                context = {"website": "微博",
+                        "keyword":keyword,
+                        "start_time":earliest_date,
+                        "end_time":latest_date,
+                        "positive_str":positive_str,
+                        "negative_str":negative_str,
+                        "dp_str":dp_str,
+                        "dz_str":dz_str,
+                        "dn_str":dn_str,
+                        "negatice":negative_str,
+                        }
+                # 填充模板
+                doc.render(context)
+                # 保存生成的报告
+                doc.save(path+"/report.docx")
+                convert(path+"/report.docx", path+"/report.pdf")
+                # 使用函数
+                file_path = path+'/report.pdf'  # 替换为你的PDF文件的本地路径
+                url_pdf = upload_file_to_0x0(file_path)
+                print('URL:', url_pdf)
+                st.session_state.url_pdf=url_pdf
 
                 st.session_state.file_clean=file_clean
                 clean_data = pd.read_csv(file_clean, encoding='utf-8', sep=';')
                 st.write(' ')
+                csv_clean_data = clean_data.to_csv(index=False)
+
+                st.download_button("下载数据",csv_clean_data, file_name=downloadfile_name, mime='text/csv')        
                 st.write(clean_data)
 
 
@@ -345,50 +458,52 @@ def main():
             waring=st.warning("请先获取并上传数据")
         # else:
         col1,col2=st.columns([3,1])
+        
         with col1:
-            with st.expander("情绪地图",True):
-                if st.session_state.file_in ==" ":
-                    unploaded_in = st.empty() 
-                    uploaded_file2=unploaded_in.file_uploader("")
-                    if uploaded_file2 is not None:
-                        waring.empty()
-                        st.session_state.file_in=uploaded_file2
-                        st.success('upload success!')
-                        # if st.session_state.website==" ":
-                        st.session_state.website = st.selectbox('请选数据的地区范围:',(' ','国内', '世界'))
+            with st.spinner('Wait about 20 seconds'):
+                with st.expander("情绪地图",True):
+                    if st.session_state.file_in ==" ":
+                        unploaded_in = st.empty() 
+                        uploaded_file2=unploaded_in.file_uploader("")
+                        if uploaded_file2 is not None:
+                            waring.empty()
+                            st.session_state.file_in=uploaded_file2
+                            st.success('upload success!')
+                            # if st.session_state.website==" ":
+                            st.session_state.website = st.selectbox('请选数据的地区范围:',(' ','国内', '世界'))
+                            style=st.empty()
+                            col,col_map,col=st.columns([1,8,1])
+                            with col_map:
+                                if st.session_state.website=="国内":
+                                    # st.session_state.style=style.selectbox("  ",("标准情绪值","相对情绪值"))
+                                    analysis('群体情绪中国地图',uploaded_file2)
+                                if st.session_state.website=="世界":
+                                    # st.session_state.style=style.selectbox("  ",("标准情绪值","相对情绪值"))
+                                    analysis('群体情绪世界地图',uploaded_file2)
+                                unploaded_in.empty()
+                    else:
+                        uploaded_file2=st.session_state.file_in
+                        if st.session_state.website==" ":
+                            st.session_state.website = st.selectbox('请选数据的地区范围:',(' ','国内', '世界'))
                         style=st.empty()
                         col,col_map,col=st.columns([1,8,1])
                         with col_map:
                             if st.session_state.website=="国内":
-                                st.session_state.style=style.selectbox("  ",("标准情绪值","相对情绪值"))
+                                # st.session_state.style=style.selectbox("  ",("标准情绪值","相对情绪值"))
                                 analysis('群体情绪中国地图',uploaded_file2)
                             if st.session_state.website=="世界":
-                                st.session_state.style=style.selectbox("  ",("标准情绪值","相对情绪值"))
+                                # st.session_state.style=style.selectbox("  ",("标准情绪值","相对情绪值"))
                                 analysis('群体情绪世界地图',uploaded_file2)
-                            unploaded_in.empty()
-                else:
-                    uploaded_file2=st.session_state.file_in
-                    if st.session_state.website==" ":
-                        st.session_state.website = st.selectbox('请选数据的地区范围:',(' ','国内', '世界'))
-                    style=st.empty()
-                    col,col_map,col=st.columns([1,8,1])
-                    with col_map:
-                        if st.session_state.website=="国内":
-                            st.session_state.style=style.selectbox("  ",("标准情绪值","相对情绪值"))
-                            analysis('群体情绪中国地图',uploaded_file2)
-                        if st.session_state.website=="世界":
-                            st.session_state.style=style.selectbox("  ",("标准情绪值","相对情绪值"))
-                            analysis('群体情绪世界地图',uploaded_file2)
-            if st.session_state.file_in !=" " and st.session_state.website!=" ":
-                    with st.expander("各地区情绪占比",True):
-                        b1, b2, b3 = st.columns([1, 0.3, 0.2])
-                        with b1:
-                            st.empty()
-                        with b2:
-                            st.session_state.p=st.selectbox("",("正面","负面"))
-                        col,col_pie,col=st.columns([1,8,1])
-                        with col_pie:
-                            analysis("群体情绪强度饼图",uploaded_file2)
+                if st.session_state.file_in !=" " and st.session_state.website!=" ":
+                        with st.expander("各地区情绪占比",True):
+                            b1, b2, b3 = st.columns([1, 0.3, 0.2])
+                            with b1:
+                                st.empty()
+                            with b2:
+                                st.session_state.p=st.selectbox("",("正面","负面"))
+                            col,col_pie,col=st.columns([1,8,1])
+                            with col_pie:
+                                analysis("群体情绪强度饼图",uploaded_file2)
                 
 
         with col2:
@@ -407,44 +522,45 @@ def main():
         # else:
         col1,col2=st.columns([3,1])
         with col1:
-            with st.expander("群体情绪趋势",True):
-                if st.session_state.file_in ==" ":
-                    unploaded_in = st.empty() 
-                    uploaded_file4=unploaded_in.file_uploader(" ")
-                    if uploaded_file4 is not None:
-                        waring.empty()
-                        st.session_state.file_in=uploaded_file4
+            with st.spinner('Wait about 10 seconds'):
+                with st.expander("群体情绪趋势",True):
+                    if st.session_state.file_in ==" ":
+                        unploaded_in = st.empty() 
+                        uploaded_file4=unploaded_in.file_uploader(" ")
+                        if uploaded_file4 is not None:
+                            waring.empty()
+                            st.session_state.file_in=uploaded_file4
+                            path1=get_middle_part(uploaded_file4.name)
+                            
+                            orifile=path1+"/"+path1.replace("数据", "")+'.csv'
+                            # orifile="D:\电磁辐射网络舆情分析系统\code\微博日本核污水排放.csv"
+                            
+                            post_all,post_poster=find_imppost_data(uploaded_file4.name)
+                            st.session_state.post_url=match_url(post_poster,orifile)
+                            st.success('upload success!')       
+                            analysis('群体情绪趋势图',uploaded_file4)
+                            unploaded_in.empty()
+                        
+                            if st.session_state.data:
+                                st.warning(st.session_state.data+" 的代表帖子")
+                                st.warning(st.session_state.imppost[st.session_state.data])
+
+                    else:
+                        uploaded_file4=st.session_state.file_in
                         path1=get_middle_part(uploaded_file4.name)
                         
                         orifile=path1+"/"+path1.replace("数据", "")+'.csv'
-                        # orifile="D:\电磁辐射网络舆情分析系统\code\微博日本核污水排放.csv"
                         
+                        # orifile="D:\电磁辐射网络舆情分析系统\code\微博日本核污水排放.csv"
                         post_all,post_poster=find_imppost_data(uploaded_file4.name)
                         st.session_state.post_url=match_url(post_poster,orifile)
-                        st.success('upload success!')       
                         analysis('群体情绪趋势图',uploaded_file4)
-                        unploaded_in.empty()
                     
                         if st.session_state.data:
                             st.warning(st.session_state.data+" 的代表帖子")
                             st.warning(st.session_state.imppost[st.session_state.data])
-
-                else:
-                    uploaded_file4=st.session_state.file_in
-                    path1=get_middle_part(uploaded_file4.name)
-                    
-                    orifile=path1+"/"+path1.replace("数据", "")+'.csv'
-                    
-                    # orifile="D:\电磁辐射网络舆情分析系统\code\微博日本核污水排放.csv"
-                    post_all,post_poster=find_imppost_data(uploaded_file4.name)
-                    st.session_state.post_url=match_url(post_poster,orifile)
-                    analysis('群体情绪趋势图',uploaded_file4)
-                
-                    if st.session_state.data:
-                        st.warning(st.session_state.data+" 的代表帖子")
-                        st.warning(st.session_state.imppost[st.session_state.data])
-                    
-                    st.warning('点击查看各日期的代表帖子')
+                        
+                        st.warning('点击查看各日期的代表帖子')
                              
         with col2:
             if st.session_state.file_in !=" ":
@@ -495,59 +611,59 @@ def main():
                         st.write(str(j) + ': ' + st.session_state.title_N[j])
 
         with col2:
-        #     with st.expander("媒介风格分析",True):
-        #         if st.session_state.name!=None:
-        #             warn=st.empty()
-        #             warn.warning(st.session_state.name)
-        #             if "的微博视频" in st.session_state.name:
-        #                 if'卫星观地球'in st.session_state.name:
-        #                     video_path=r'data_weibo\日本核污水排放\video\1.mp4'    
-        #                 if'难舍深蓝'in st.session_state.name:
-        #                     video_path=r'data_weibo\日本核污水排放\video\2.mp4'    
-        #                 if'经济过热'in st.session_state.name:
-        #                     video_path=r'data_weibo\疫情后的经济\video\1.mp4'
-        #                 if'德国联邦议院'in st.session_state.name:
-        #                     video_path=r'data_weibo\疫情后的经济\video\2.mp4'
-        #                 if'墨染诗婳'in st.session_state.name:
-        #                     video_path=r'data_weibo\日本核污水排放\video\9.mp4'    
+            # with st.expander("媒介风格分析",True):
+            #     if st.session_state.name!=None:
+            #         warn=st.empty()
+            #         warn.warning(st.session_state.name)
+            #         if "的微博视频" in st.session_state.name:
+            #             if'卫星观地球'in st.session_state.name:
+            #                 video_path=r'data_weibo\日本核污水排放\video\1.mp4'    
+            #             if'难舍深蓝'in st.session_state.name:
+            #                 video_path=r'data_weibo\日本核污水排放\video\2.mp4'    
+            #             if'经济过热'in st.session_state.name:
+            #                 video_path=r'data_weibo\疫情后的经济\video\1.mp4'
+            #             if'德国联邦议院'in st.session_state.name:
+            #                 video_path=r'data_weibo\疫情后的经济\video\2.mp4'
+            #             if'墨染诗婳'in st.session_state.name:
+            #                 video_path=r'data_weibo\日本核污水排放\video\9.mp4'    
 
-        #                 result_emotion="result.txt"
-        #                 file_modality="C:/Users/86187/Desktop/新闻策划与效果评估系统/情感传播效果评估子系统/result_modality.csv"
+            #             result_emotion="result.txt"
+            #             file_modality="C:/Users/86187/Desktop/新闻策划与效果评估系统/情感传播效果评估子系统/result_modality.csv"
                         
-        #             col_video,col_charts=st.columns([1,1])                
+            #         col_video,col_charts=st.columns([1,1])                
 
-        #             if video_path !=" ":
-        #                 other_video=st.empty()
-        #                 with col_video:
-        #                     file_video=st.empty()
-        #                     file_video.video(video_path) # 更改点                                
+            #         if video_path !=" ":
+            #             other_video=st.empty()
+            #             with col_video:
+            #                 file_video=st.empty()
+            #                 file_video.video(video_path) # 更改点                                
 
-        #                 with col_charts:                           
-        #                     base_name = os.path.basename(video_path)
-        #                     fn = os.path.splitext(base_name)[0]
-        #                     try:
-        #                         V2EM_prediction.main_for_st.emotion_analysis(str(fn)) 
-        #                         the_chart=st.selectbox('',('情绪极性','各模态细粒度分析'))
-        #                         if the_chart=='情绪极性':
-        #                             analysis('单视频情绪极性',result_emotion)
-        #                         if the_chart=='各模态细粒度分析':
-        #                             analysis('单视频模态细粒度',file_modality)
-        #                     except:
-        #                         warn.error('该视频多模态情感分析失效，尝试上传其他视频（失效原因：视频中未出现人脸或出现多个人脸）')
-        #                         file_video.empty()
-        #                         uploaded_video = other_video.file_uploader('  ')
-        #                         if uploaded_video is not None:
-        #                             warn.success('上传成功！')
-        #                             other_video.empty()
-        #                             fn = uploaded_video.name.split('.')[0]
-        #                             mp4_path = f'D:/电磁辐射网络舆情分析系统/code/data_weibo/日本核污水排放/video/{fn}.mp4'
-        #                             file_video.video(mp4_path)
-        #                             V2EM_prediction.main_for_st.emotion_analysis(str(fn)) 
-        #                             the_chart=st.selectbox('',('情绪极性','各模态细粒度分析'))
-        #                             if the_chart=='情绪极性':
-        #                                 analysis('单视频情绪极性',result_emotion)
-        #                             if the_chart=='各模态细粒度分析':
-        #                                 analysis('单视频模态细粒度',file_modality)
+            #             with col_charts:                           
+            #                 base_name = os.path.basename(video_path)
+            #                 fn = os.path.splitext(base_name)[0]
+            #                 try:
+            #                     V2EM_prediction.main_for_st.emotion_analysis(str(fn)) 
+            #                     the_chart=st.selectbox('',('情绪极性','各模态细粒度分析'))
+            #                     if the_chart=='情绪极性':
+            #                         analysis('单视频情绪极性',result_emotion)
+            #                     if the_chart=='各模态细粒度分析':
+            #                         analysis('单视频模态细粒度',file_modality)
+            #                 except:
+            #                     warn.error('该视频多模态情感分析失效，尝试上传其他视频（失效原因：视频中未出现人脸或出现多个人脸）')
+            #                     file_video.empty()
+            #                     uploaded_video = other_video.file_uploader('  ')
+            #                     if uploaded_video is not None:
+            #                         warn.success('上传成功！')
+            #                         other_video.empty()
+            #                         fn = uploaded_video.name.split('.')[0]
+            #                         mp4_path = f'D:/电磁辐射网络舆情分析系统/code/data_weibo/日本核污水排放/video/{fn}.mp4'
+            #                         file_video.video(mp4_path)
+            #                         V2EM_prediction.main_for_st.emotion_analysis(str(fn)) 
+            #                         the_chart=st.selectbox('',('情绪极性','各模态细粒度分析'))
+            #                         if the_chart=='情绪极性':
+            #                             analysis('单视频情绪极性',result_emotion)
+            #                         if the_chart=='各模态细粒度分析':
+            #                             analysis('单视频模态细粒度',file_modality)
           
 
             if st.session_state.file_in != " ":
@@ -558,7 +674,6 @@ def main():
                 
             
     
-
 if __name__ == '__main__':  # 不用命令端输入“streamlit run app.py”而直接运行
     if runtime.exists():
         main()
