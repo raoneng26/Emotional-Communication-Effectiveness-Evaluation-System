@@ -416,7 +416,7 @@ def main():
                 print("最早的日期：", earliest_date)
                 print("最晚的日期：", latest_date)
                 # 加载模板
-                doc = DocxTemplate(path+"\测试报告.docx")
+                doc = DocxTemplate(path+"/测试报告.docx")
                 # 创建一个字典，其中的键对应模板中的占位符
                 context = {"website": "微博",
                         "keyword":keyword,
