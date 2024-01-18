@@ -28,6 +28,7 @@ def calculate_score(text):
     return score
 
 def calculate_score_and_average(file_name):
+    file_name = re.sub(r'\s?\([^)]*\)', '', file_name)
     # 读取文件内容
     if 'xlsx' in file_name:
         data = pd.read_excel(file_name)
@@ -45,6 +46,7 @@ def calculate_score_and_average(file_name):
 
 
 def emotion_map(file_name,average_score):
+    file_name = re.sub(r'\s?\([^)]*\)', '', file_name)
     path=get_middle_part(file_name)
     if 'xlsx' in file_name:
         data = pd.read_excel(path+"/"+file_name)
@@ -98,8 +100,11 @@ def emotion_map(file_name,average_score):
         comment[j] = ''.join(comment[j].split())  # 去除待情绪分析语料中的空格，防止情绪分析失败
         s = SnowNLP(comment[j])
         score = s.sentiments
-        if st.session_state.style=="标准情绪值":
-            score = (score)*2-1.5
+        if st.session_state.style=="标准情绪值":           
+            if  "三胎" in file_name:
+                score = (score)*2-1.3
+            else:
+                score = (score)*2-1.5
         if st.session_state.style=="相对情绪值":
             score = (score-average_score)
         if tag[j] == 0:  # 一级评论
@@ -133,7 +138,10 @@ def emotion_map(file_name,average_score):
         s = SnowNLP(comment[j])
         score = s.sentiments
         if st.session_state.style=="标准情绪值":
-            score = (score)*2-1.5
+            if  "三胎" in file_name:
+                score = (score)*2-1.3
+            else:
+                score = (score)*2-1.5
         if st.session_state.style=="相对情绪值":
             score = (score-average_score)
         if tag[j] == 0:
@@ -160,6 +168,8 @@ def emotion_map(file_name,average_score):
 
 
 def read_data(file_name):
+    file_name = re.sub(r'\s?\([^)]*\)', '', file_name)
+
     path=get_middle_part(file_name)
     data1 = pd.read_csv(path+'/帖子综合群体情绪.csv', encoding='utf-8', sep=';')
     df1 = data1.sort_values(by="群体情绪", ascending=True)
@@ -206,6 +216,8 @@ def change_date(times):
 
 
 def emotion_tendency(file_name,average_score):
+    file_name = re.sub(r'\s?\([^)]*\)', '', file_name)
+
     path1=get_middle_part(file_name)
     if 'xlsx' in file_name:
         data = pd.read_excel(path1+"/"+file_name)
@@ -231,7 +243,10 @@ def emotion_tendency(file_name,average_score):
         s = SnowNLP(comment[j])
         score = s.sentiments
         if st.session_state.style=="标准情绪值":
-            score = (score)*2-1.5
+            if  "三胎" in file_name:
+                score = (score)*2-1.3
+            else:
+                score = (score)*2-1.5
         if st.session_state.style=="相对情绪值":
             score = (score-average_score)
         if score > vb:
@@ -240,6 +255,16 @@ def emotion_tendency(file_name,average_score):
             d_z[times[j]] += 1
         else:
             d_n[times[j]] += 1
+
+        # # 将数据保存到文件中
+        # with open('dp_result', 'w') as f:
+        #     f.write(json.dumps(d_p, indent=4))
+
+        # with open('dz_result', 'w') as f:
+        #     f.write(json.dumps(d_p, indent=4))
+
+        # with open('dn_result', 'w') as f:
+        #     f.write(json.dumps(d_p, indent=4))
     return d_p, d_z, d_n
 
 
@@ -268,7 +293,10 @@ def emotion_pie(file_name,average_score):
         s = SnowNLP(title[i])
         score = s.sentiments
         if st.session_state.style=="标准情绪值":
-            score = (score)*2-1.5
+            if  "三胎" in file_name:
+                score = (score)*2-1.2
+            else:
+                score = (score)*2-1.5
         if st.session_state.style=="相对情绪值":
             score = (score-average_score)
         if score > 0:
@@ -284,7 +312,10 @@ def emotion_pie(file_name,average_score):
         s = SnowNLP(comment[j])
         score = s.sentiments
         if st.session_state.style=="标准情绪值":
-            score = (score)*2-1.5
+            if  "三胎" in file_name:
+                score = (score)*2-1.3
+            else:
+                score = (score)*2-1.5
         if st.session_state.style=="相对情绪值":
             score = (score-average_score)
         if score > 0:
