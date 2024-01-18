@@ -406,6 +406,29 @@ def analysis(side_bar,uploaded_file):
 
         if st.session_state.post_url is None:
             st.session_state.post_url = {k: "#" for k in dp.keys()}
+        if "三胎" in  uploaded_file.name:
+            st.session_state.post_url['2022-02-07']=''
+            st.session_state.post_url['2022-04-03']='https://weibo.com/5667408729/LmMHGFL5s?refer_flag=1001030103_'
+            st.session_state.post_url['2022-04-02']='https://weibo.com/6143949524/LmDdJlwIX?refer_flag=1001030103_'
+            st.session_state.post_url['2022-04-01']='https://weibo.com/7640149802/LmtKrDKxY?refer_flag=1001030103_'
+            st.session_state.post_url['2022-03-31']='https://weibo.com/5450010616/Lmklh9YKr?refer_flag=1001030103_'
+            st.session_state.post_url['2022-03-30']='https://weibo.com/5182206234/LmaX2scuX?refer_flag=1001030103_'
+            st.session_state.post_url['2022-03-24']='https://weibo.com/7532428960/LlgqJpfc2?refer_flag=1001030103_'
+            st.session_state.post_url['2022-03-20']='https://weibo.com/7544904057/LkEHZldMS?refer_flag=1001030103_'
+            st.session_state.post_url['2022-03-09']='https://weibo.com/5369396977/LiYYCkLT3?refer_flag=1001030103_'
+            st.session_state.post_url['2022-03-08']='https://weibo.com/6143280254/LiPAOpPoP?refer_flag=1001030103_'
+            st.session_state.post_url['2022-03-07']='https://weibo.com/6082210567/LiG9zdD9w?refer_flag=1001030103_'
+            st.session_state.post_url['2022-03-06']='https://weibo.com/6342284705/LiwJZonN6?refer_flag=1001030103_'
+            st.session_state.post_url['2022-03-05']='https://weibo.com/6035661337/LinicuR2z?refer_flag=1001030103_'
+            st.session_state.post_url['2022-03-02']='https://weibo.com/5513200635/LhUN34cbx?refer_flag=1001030103_'
+            st.session_state.post_url['2022-03-01']='https://weibo.com/2243012575/LhLzH6MQ1?refer_flag=1001030103_'
+            st.session_state.post_url['2022-02-22']='https://weibo.com/6066487475/LgHAGsksT?refer_flag=1001030103_'
+            st.session_state.post_url['2022-02-21']='https://weibo.com/3926910490/Lgy56ykmQ?refer_flag=1001030103_'
+            st.session_state.post_url['2022-02-17']='https://weibo.com/1785732764/LfWq3e9Ha?refer_flag=1001030103_'
+            st.session_state.post_url['2022-02-09']='https://weibo.com/1895323925/LeJ0sBLvK?refer_flag=1001030103_'
+            st.session_state.post_url['2022-02-08']='https://weibo.com/6449317967/LezBA2TFu?refer_flag=1001030103_'
+            st.session_state.post_url['2022-02-07']='https://weibo.com/1967280501/Leqco7yvu?refer_flag=1001030103_'
+            
         # colors = ['green' if v > 0 else 'yellow' if v == 0 else 'red' for v in list(dp.values())]
         imageUrls = [
                 "data_weibo\日本核污水排放\img\1.png",
