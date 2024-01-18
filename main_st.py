@@ -279,6 +279,7 @@ def find_imppost_data(file_name):
 
 
 def match_url(dict_, csv_file):
+    csv_file = re.sub(r'\s?\([^)]*\)', '', csv_file)
     url_data = pd.read_csv(csv_file, encoding='utf-8', sep=';')
     result_dict = {}
     for date, publisher in dict_.items():
