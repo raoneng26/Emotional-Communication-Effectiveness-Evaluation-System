@@ -12,7 +12,7 @@ from streamlit.components.v1 import html
 import main
 import 画图
 import numpy as np
-
+import re
 
 
 def get_middle_part(file_name):
