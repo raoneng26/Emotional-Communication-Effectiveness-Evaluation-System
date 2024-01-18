@@ -134,10 +134,28 @@ def analysis(side_bar,uploaded_file):
         ]
         
         url_st_P=[
-            '#','#','#','#','#','#','#','#','#','#',
+            'https://weibo.com/1731060613/LiLyNhgPY?refer_flag=1001030103_',
+            'https://weibo.com/7898673356/NCtga2Xnr',
+            'https://weibo.com/7833149398/NCt8B0GAJ',
+            'https://weibo.com/7465578749/Lmbyj8M3o?refer_flag=1001030103_',
+            'https://weibo.com/7833149398/NCtafkuSI',
+            'https://weibo.com/6773287499/MyMoN7PdN?refer_flag=1001030103_',
+            'https://weibo.com/7833149398/NCtcj0TPI',
+            'https://weibo.com/1801274095/LmgAHt3yb?refer_flag=1001030103_',
+            'https://weibo.com/7316590223/LmgkSayjA?refer_flag=1001030103_',
+            'https://weibo.com/7833149398/NCtdzrSTM',
         ]
+        url_st_P.reverse()
+
         url_st_N=[
-            '#','#','#','#','#','#','#','#','#','#',
+            'https://weibo.com/7898673356/NCtfSu40C',
+            'https://weibo.com/7898673356/NCtgSckSI',
+            'https://weibo.com/2824412120/LmBx1kzj8?refer_flag=1001030103_',
+            'https://weibo.com/7898673356/NCti6tL8g',
+            'https://weibo.com/7898673356/NCtiA2TyC',
+            'https://weibo.com/2540451950/Lmz0psopM?refer_flag=1001030103_',
+            'https://weibo.com/7898673356/NCtjaF4BL',
+            'https://weibo.com/7898673356/NCtjqDB54','#','#',
         ]
         if "疫情"in uploaded_file.name:
             url_P=url_yq_P
