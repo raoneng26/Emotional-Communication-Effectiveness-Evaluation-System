@@ -16,6 +16,7 @@ import numpy as np
 
 
 def get_middle_part(file_name):
+    file_name = re.sub(r'\s?\([^)]*\)', '', file_name)
     # 去除文件扩展名
     file_name = file_name.split('.')[0]
     # 按照 "-" 分割文件名
@@ -73,6 +74,8 @@ def analysis(side_bar,uploaded_file):
         title_P, emotion_P = title_P[-10:], emotion_P[-10:]  # 只选择前10个正面情绪
         title_N, emotion_N = title_N[:10], emotion_N[:10]  # 只选择前10个负面情绪
         st.session_state.title_N=title_N
+        st.session_state.title_P = title_P[::-1]
+
         st.session_state.name=None
         url_hfs_P=[
             'https://weibo.com/7715598783/NibhU6Jrn?refer_flag=1001030103_',
@@ -130,6 +133,12 @@ def analysis(side_bar,uploaded_file):
             'https://weibo.com/7277507691/MFSg2wb8F?refer_flag=1001030103_',
         ]
         
+        url_st_P=[
+            '#','#','#','#','#','#','#','#','#','#',
+        ]
+        url_st_N=[
+            '#','#','#','#','#','#','#','#','#','#',
+        ]
         if "疫情"in uploaded_file.name:
             url_P=url_yq_P
             url_N=url_yq_N 
@@ -137,6 +146,9 @@ def analysis(side_bar,uploaded_file):
         if "核污水"in uploaded_file.name:
             url_P=url_hfs_P
             url_N=url_hfs_N 
+        if "三胎" in uploaded_file.name:
+            url_P=url_st_P
+            url_N=url_st_N
 
         if st.session_state.p2=="正面":
             st.session_state.img=[
@@ -374,7 +386,8 @@ def analysis(side_bar,uploaded_file):
         # dz=dp
         # dp=dtemp2
 
-
+        if st.session_state.post_url is None:
+            st.session_state.post_url = {"#": "#"}
         # colors = ['green' if v > 0 else 'yellow' if v == 0 else 'red' for v in list(dp.values())]
         imageUrls = [
                 "data_weibo\日本核污水排放\img\1.png",
