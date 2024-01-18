@@ -19,7 +19,7 @@ from datetime import datetime,timedelta
 from docxtpl import DocxTemplate
 from docx2pdf import convert
 import requests
-
+import re
 
 def initial():
     global keyword
@@ -181,10 +181,13 @@ def report_show():
     reportpath1='report.jpg' # -----------------更改点--------------
     # reporturl=st.session_state.url_pdf
     if "疫情" in st.session_state.file_in.name:
-        reporturl=r"https://shimo.im/file/ZzkLMeKnJ7cyPMAQ/"# -----------------更改点--------------
-        
+        reporturl=r"https://drive.google.com/file/d/1i8suHggGPvH-QECbR5f9AtrDh9jLULlN/view?usp=sharing"# -----------------更改点--------------
+
     if "日本" in st.session_state.file_in.name:
-        reporturl=r"https://shimo.im/file/m8AZMmW044Sx5xkb"
+        reporturl=r"https://drive.google.com/file/d/1OKFRVaK5IK8Wr9yb368YojmzOh1URxOT/view?usp=sharing"
+     
+    if "三胎" in st.session_state.file_in.name:
+        reporturl=r"https://drive.google.com/file/d/1BVOOybmUD7Dd6hyKJPRTOC2NALh80Qi5/view?usp=sharing"
     with open(reportpath1, "rb") as f:
         data = f.read()
         encoded = base64.b64encode(data)
@@ -256,6 +259,7 @@ def change_date(times):
 
 
 def find_imppost_data(file_name):
+    file_name = re.sub(r'\s?\([^)]*\)', '', file_name)
     path1=get_middle_part(file_name)
     if 'xlsx' in file_name:
         data = pd.read_excel(path1+"/"+file_name)
@@ -372,6 +376,12 @@ def main():
                     file_clean="微博疫情后的经济数据/clean-微博疫情后的经济数据.csv"  # ------------------------更改点------------------------------
                     downloadfile_name="clean-微博疫情后的经济数据.csv"
                     file_path="微博疫情后的经济数据"
+
+                if '三胎'in keyword:
+                    file_clean="微博三胎政策数据/clean-微博三胎政策数据.csv"  # ------------------------更改点------------------------------
+                    downloadfile_name="clean-微博三胎政策数据.csv"
+                    file_path="微博三胎政策数据"   
+                    st.session_state.keyword="三胎"             
 
                 # path=file_path
                 # # 对字典进行排序
@@ -537,7 +547,10 @@ def main():
                             # orifile="D:\电磁辐射网络舆情分析系统\code\微博日本核污水排放.csv"
                             
                             post_all,post_poster=find_imppost_data(uploaded_file4.name)
-                            st.session_state.post_url=match_url(post_poster,orifile)
+                            if "三胎" not in uploaded_file4.name:
+                                st.session_state.post_url=match_url(post_poster,orifile)
+                            else:
+                                st.session_state.post_url=None
                             st.success('upload success!')       
                             analysis('群体情绪趋势图',uploaded_file4)
                             unploaded_in.empty()
@@ -554,7 +567,10 @@ def main():
                         
                         # orifile="D:\电磁辐射网络舆情分析系统\code\微博日本核污水排放.csv"
                         post_all,post_poster=find_imppost_data(uploaded_file4.name)
-                        st.session_state.post_url=match_url(post_poster,orifile)
+                        if "三胎" not in uploaded_file4.name:
+                            st.session_state.post_url=match_url(post_poster,orifile)
+                        else:
+                            st.session_state.post_url=None
                         analysis('群体情绪趋势图',uploaded_file4)
                     
                         if st.session_state.data:
@@ -607,9 +623,14 @@ def main():
                     analysis('群体情绪排行榜',uploaded_file6)
             if st.session_state.p2 is not None:
                 with st.expander('展开显示全部标题'):
-                    ln = len(st.session_state.title_N)
-                    for j in range(0, ln):
-                        st.write(str(j) + ': ' + st.session_state.title_N[j])
+                    if st.session_state.p2=="负面":
+                        ln = len(st.session_state.title_N)
+                        for j in range(0, ln):
+                            st.write(str(j) + ': ' + st.session_state.title_N[j])
+                    else:
+                        ln = len(st.session_state.title_P)
+                        for j in range(0, ln):
+                            st.write(str(j) + ': ' + st.session_state.title_P[j])
 
         with col2:
             # with st.expander("媒介风格分析",True):
