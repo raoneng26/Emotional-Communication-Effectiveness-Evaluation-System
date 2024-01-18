@@ -387,7 +387,7 @@ def analysis(side_bar,uploaded_file):
         # dp=dtemp2
 
         if st.session_state.post_url is None:
-            st.session_state.post_url = {"#": "#"}
+            st.session_state.post_url = {k: "#" for k in dp.keys()}
         # colors = ['green' if v > 0 else 'yellow' if v == 0 else 'red' for v in list(dp.values())]
         imageUrls = [
                 "data_weibo\日本核污水排放\img\1.png",
