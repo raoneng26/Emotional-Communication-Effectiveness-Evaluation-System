@@ -67,6 +67,8 @@ def cluster_trust(file_name):
     max_trans = max(trans)
     cre3 = trans / max_trans
     # 信任度指数4
+    if "三胎" in file_name:
+        data_simple['帖子账号粉丝数']=0
     fan_num = data_simple['帖子账号粉丝数'].values
     max_fan = max(fan_num)
     cre4 = fan_num / max_fan
@@ -135,6 +137,8 @@ def cluster_trust(file_name):
     tag = data['标记']
     # 信任度指数4：一级评论账号粉丝数
     first_fan = []
+    if "三胎" in file_name:
+        data['一级账号粉丝数']=data['评论点赞数']
     for k in range(0, len(tag)-1):
         if tag[k] == 0:
             if tag[k + 1] == 1:
