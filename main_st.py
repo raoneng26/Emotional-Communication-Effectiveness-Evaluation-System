@@ -181,13 +181,15 @@ def report_show():
     reportpath1='report.jpg' # -----------------更改点--------------
     # reporturl=st.session_state.url_pdf
     if "疫情" in st.session_state.file_in.name:
-        reporturl=r"https://drive.google.com/file/d/1i8suHggGPvH-QECbR5f9AtrDh9jLULlN/view?usp=sharing"# -----------------更改点--------------
-
+        # reporturl=r"https://drive.google.com/file/d/1i8suHggGPvH-QECbR5f9AtrDh9jLULlN/view?usp=sharing"# -----------------更改点--------------
+        reporturl=r'https://smallpdf.com/cn/file#s=00a9e41b-9dda-42d5-ad0c-b0bb4c5d3d10'
     if "日本" in st.session_state.file_in.name:
-        reporturl=r"https://drive.google.com/file/d/1OKFRVaK5IK8Wr9yb368YojmzOh1URxOT/view?usp=sharing"
+        # reporturl=r"https://drive.google.com/file/d/1OKFRVaK5IK8Wr9yb368YojmzOh1URxOT/view?usp=sharing"
+        reporturl=r'https://smallpdf.com/cn/file#s=53df9b72-ecc9-4cc5-8567-a34ec8a5a2ec'
      
     if "三胎" in st.session_state.file_in.name:
-        reporturl=r"https://drive.google.com/file/d/1BVOOybmUD7Dd6hyKJPRTOC2NALh80Qi5/view?usp=sharing"
+        # reporturl=r"https://drive.google.com/file/d/1BVOOybmUD7Dd6hyKJPRTOC2NALh80Qi5/view?usp=sharing"
+        reporturl=r'https://smallpdf.com/cn/file#s=b0133606-d306-465f-97fc-e9e6c4907006'
     with open(reportpath1, "rb") as f:
         data = f.read()
         encoded = base64.b64encode(data)
