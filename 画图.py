@@ -174,10 +174,11 @@ def read_data(file_name):
     data1 = pd.read_csv(path+'/帖子综合群体情绪.csv', encoding='utf-8', sep=';')
     df1 = data1.sort_values(by="群体情绪", ascending=True)
     df1 = df1.loc[:, ['文本', '群体情绪']]
+    emotion = df1['群体情绪'].values
     if  "网络" in file_name:
         emotion = 2 * (emotion - np.min(emotion)) / (np.max(emotion) - np.min(emotion)) - 1
 
-    emotion = df1['群体情绪'].values
+    
     title = df1['文本'].values
     emotion_p = []
     title_p = []
