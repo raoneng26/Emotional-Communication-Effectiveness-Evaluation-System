@@ -243,7 +243,7 @@ def emotion_tendency(file_name,average_score):
         d_z[time1] = 0
         d_n[time1] = 0
     for j in range(0, len(comment)):
-        comment[j] = ''.join(comment[j].split())  # 去除待情绪分析语料中的空格，防止情绪分析失败
+        # comment[j] = ''.join(comment[j].split())  # 去除待情绪分析语料中的空格，防止情绪分析失败
         s = SnowNLP(comment[j])
         score = s.sentiments
         if st.session_state.style=="标准情绪值":
@@ -251,7 +251,7 @@ def emotion_tendency(file_name,average_score):
             if  "三胎" in file_name:
                 score = (score)*2-1.3
             elif "网络" in file_name:
-                score = score
+                score = score-.3
             else:
                 score = (score)*2-1.5
         if st.session_state.style=="相对情绪值":
