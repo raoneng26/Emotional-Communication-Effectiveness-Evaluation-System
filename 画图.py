@@ -247,6 +247,7 @@ def emotion_tendency(file_name,average_score):
         s = SnowNLP(comment[j])
         score = s.sentiments
         if st.session_state.style=="标准情绪值":
+            print(file_name)
             if  "三胎" in file_name:
                 score = (score)*2-1.3
             elif "网络" in file_name:
