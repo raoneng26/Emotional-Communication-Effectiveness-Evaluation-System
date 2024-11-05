@@ -430,7 +430,7 @@ def analysis(side_bar,uploaded_file):
 
     if side_bar == '群体情绪趋势图':
         dp, dz, dn = 画图.emotion_tendency(uploaded_file.name,st.session_state.average_score)
-        print(dp, dz, dn)
+        # print(dp, dz, dn)
         # dtemp=dp
         # dtemp2=dz
         # dp=dn
