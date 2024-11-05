@@ -461,7 +461,13 @@ def analysis(side_bar,uploaded_file):
             st.session_state.post_url['2022-02-09']='https://weibo.com/1895323925/LeJ0sBLvK?refer_flag=1001030103_'
             st.session_state.post_url['2022-02-08']='https://weibo.com/6449317967/LezBA2TFu?refer_flag=1001030103_'
             st.session_state.post_url['2022-02-07']='https://weibo.com/1967280501/Leqco7yvu?refer_flag=1001030103_'
-            
+        if "网络" in  uploaded_file.name:
+            st.session_state.post_url['2024-05-23']='https://facebook.com/story.php?story_fbid=pfbid0HjFrM1YfjkoCuJosRnvaFwdjewhhuhZWc7rAeepVSnoXX5r8cjjSNfLWesCaXnq9l&id=100047112765345'
+            st.session_state.post_url['2024-06-15']='https://facebook.com/story.php?story_fbid=pfbid02JE6tAXHXnAL2pvpyRNWXeGjXwHWiiByBRPvbThDr9o1sXkYL31SszaeuxnSbzc8El&id=100092945240607'
+            st.session_state.post_url['2024-06-16']='https://facebook.com/story.php?story_fbid=pfbid02K4NbN6sv7ovtB9XsBdxbqU9WGLgKLqgucvCdgx1eAztk5JNeXyc5AEjSseyvnqqol&id=100000682863575'
+            st.session_state.post_url['2024-06-18']='https://facebook.com/story.php?story_fbid=pfbid029B8T2JGu7DAfqsN8oK2AnM3YDGXWem2Jx3QYmuKuBNarM9HTZqcWtAAKSptt6J6tl&id=100044582072702'
+            st.session_state.post_url['2024-06-19']='https://facebook.com/story.php?story_fbid=pfbid029B8T2JGu7DAfqsN8oK2AnM3YDGXWem2Jx3QYmuKuBNarM9HTZqcWtAAKSptt6J6tl&id=100044582072702'
+
         # colors = ['green' if v > 0 else 'yellow' if v == 0 else 'red' for v in list(dp.values())]
         imageUrls = [
                 "data_weibo\日本核污水排放\img\1.png",
