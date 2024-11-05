@@ -77,6 +77,20 @@ def analysis(side_bar,uploaded_file):
         st.session_state.title_P = title_P[::-1]
 
         st.session_state.name=None
+        url_wl_P=[
+            'https://facebook.com/story.php?story_fbid=pfbid025STRYCt3DqJNKB4SMjoDFQJGzbuWhfLyGDYGL7zcF4t2PLiEU2X4CjS9dVarppyZl&id=100064837862450',
+            'https://facebook.com/story.php?story_fbid=pfbid025STRYCt3DqJNKB4SMjoDFQJGzbuWhfLyGDYGL7zcF4t2PLiEU2X4CjS9dVarppyZl&id=100064837862450',
+            'https://facebook.com/story.php?story_fbid=pfbid025STRYCt3DqJNKB4SMjoDFQJGzbuWhfLyGDYGL7zcF4t2PLiEU2X4CjS9dVarppyZl&id=100064837862450',
+            'https://facebook.com/story.php?story_fbid=pfbid025STRYCt3DqJNKB4SMjoDFQJGzbuWhfLyGDYGL7zcF4t2PLiEU2X4CjS9dVarppyZl&id=100064837862450',
+            'https://facebook.com/story.php?story_fbid=pfbid025STRYCt3DqJNKB4SMjoDFQJGzbuWhfLyGDYGL7zcF4t2PLiEU2X4CjS9dVarppyZl&id=100064837862450',
+            'https://facebook.com/story.php?story_fbid=pfbid025STRYCt3DqJNKB4SMjoDFQJGzbuWhfLyGDYGL7zcF4t2PLiEU2X4CjS9dVarppyZl&id=100064837862450',
+            'https://facebook.com/story.php?story_fbid=pfbid025STRYCt3DqJNKB4SMjoDFQJGzbuWhfLyGDYGL7zcF4t2PLiEU2X4CjS9dVarppyZl&id=100064837862450',
+            'https://facebook.com/story.php?story_fbid=pfbid025STRYCt3DqJNKB4SMjoDFQJGzbuWhfLyGDYGL7zcF4t2PLiEU2X4CjS9dVarppyZl&id=100064837862450',
+            'https://facebook.com/story.php?story_fbid=pfbid025STRYCt3DqJNKB4SMjoDFQJGzbuWhfLyGDYGL7zcF4t2PLiEU2X4CjS9dVarppyZl&id=100064837862450',
+            'https://facebook.com/story.php?story_fbid=pfbid025STRYCt3DqJNKB4SMjoDFQJGzbuWhfLyGDYGL7zcF4t2PLiEU2X4CjS9dVarppyZl&id=100064837862450',
+        ]
+        url_wl_P.reverse()
+        
         url_hfs_P=[
             'https://weibo.com/7715598783/NibhU6Jrn?refer_flag=1001030103_',
             'https://weibo.com/5336709153/Niyr1rrbP?refer_flag=1001030103_',
@@ -105,6 +119,21 @@ def analysis(side_bar,uploaded_file):
             'https://weibo.com/6859841043/NqhiNbJCi?refer_flag=1001030103_',
         ]
         url_yq_P.reverse()
+        
+        url_wl_N=[
+            'https://facebook.com/story.php?story_fbid=pfbid025STRYCt3DqJNKB4SMjoDFQJGzbuWhfLyGDYGL7zcF4t2PLiEU2X4CjS9dVarppyZl&id=100064837862450',
+            'https://facebook.com/story.php?story_fbid=pfbid025STRYCt3DqJNKB4SMjoDFQJGzbuWhfLyGDYGL7zcF4t2PLiEU2X4CjS9dVarppyZl&id=100064837862450',
+            'https://facebook.com/story.php?story_fbid=pfbid025STRYCt3DqJNKB4SMjoDFQJGzbuWhfLyGDYGL7zcF4t2PLiEU2X4CjS9dVarppyZl&id=100064837862450',
+            'https://facebook.com/story.php?story_fbid=pfbid025STRYCt3DqJNKB4SMjoDFQJGzbuWhfLyGDYGL7zcF4t2PLiEU2X4CjS9dVarppyZl&id=100064837862450',
+            'https://facebook.com/story.php?story_fbid=pfbid025STRYCt3DqJNKB4SMjoDFQJGzbuWhfLyGDYGL7zcF4t2PLiEU2X4CjS9dVarppyZl&id=100064837862450',
+            'https://facebook.com/story.php?story_fbid=pfbid025STRYCt3DqJNKB4SMjoDFQJGzbuWhfLyGDYGL7zcF4t2PLiEU2X4CjS9dVarppyZl&id=100064837862450',
+            'https://facebook.com/story.php?story_fbid=pfbid025STRYCt3DqJNKB4SMjoDFQJGzbuWhfLyGDYGL7zcF4t2PLiEU2X4CjS9dVarppyZl&id=100064837862450',
+            'https://facebook.com/story.php?story_fbid=pfbid025STRYCt3DqJNKB4SMjoDFQJGzbuWhfLyGDYGL7zcF4t2PLiEU2X4CjS9dVarppyZl&id=100064837862450',
+            'https://facebook.com/story.php?story_fbid=pfbid025STRYCt3DqJNKB4SMjoDFQJGzbuWhfLyGDYGL7zcF4t2PLiEU2X4CjS9dVarppyZl&id=100064837862450',
+            'https://facebook.com/story.php?story_fbid=pfbid025STRYCt3DqJNKB4SMjoDFQJGzbuWhfLyGDYGL7zcF4t2PLiEU2X4CjS9dVarppyZl&id=100064837862450',
+
+            
+        ]
 
         url_hfs_N=[
             'https://weibo.com/3313907053/NiLdBcSji?refer_flag=1001030103_',
@@ -167,6 +196,10 @@ def analysis(side_bar,uploaded_file):
         if "三胎" in uploaded_file.name:
             url_P=url_st_P
             url_N=url_st_N
+
+        if "网络" in uploaded_file.name:
+            url_P=url_wl_P
+            url_N=url_wl_N
 
         if st.session_state.p2=="正面":
             st.session_state.img=[
