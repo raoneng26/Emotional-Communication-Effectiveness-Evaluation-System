@@ -271,6 +271,7 @@ def emotion_tendency(file_name,average_score):
 
         # with open('dn_result', 'w') as f:
         #     f.write(json.dumps(d_p, indent=4))
+        print( d_p, d_z, d_n)
     return d_p, d_z, d_n
 
 
