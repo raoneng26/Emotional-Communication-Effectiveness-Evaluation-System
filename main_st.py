@@ -190,6 +190,11 @@ def report_show():
     if "三胎" in st.session_state.file_in.name:
         # reporturl=r"https://drive.google.com/file/d/1BVOOybmUD7Dd6hyKJPRTOC2NALh80Qi5/view?usp=sharing"
         reporturl=r'https://smallpdf.com/cn/file#s=b0133606-d306-465f-97fc-e9e6c4907006'
+
+    if "网络" in st.session_state.file_in.name:
+        # reporturl=r"https://drive.google.com/file/d/1BVOOybmUD7Dd6hyKJPRTOC2NALh80Qi5/view?usp=sharing"
+        reporturl=r'#'
+        
     with open(reportpath1, "rb") as f:
         data = f.read()
         encoded = base64.b64encode(data)
