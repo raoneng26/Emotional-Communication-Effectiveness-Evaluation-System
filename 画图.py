@@ -251,7 +251,7 @@ def emotion_tendency(file_name,average_score):
             if  "三胎" in file_name:
                 score = (score)*2-1.3
             elif "网络" in file_name:
-                score = score- 0.4
+                score = score- 0.3
             else:
                 score = (score)*2-1.5
         if st.session_state.style=="相对情绪值":
