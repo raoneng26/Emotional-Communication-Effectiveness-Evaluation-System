@@ -255,6 +255,8 @@ def emotion_tendency(file_name,average_score):
                 score = (score)*2-1.5
         if st.session_state.style=="相对情绪值":
             score = (score-average_score)
+            if "网络" in file_name:
+                score = score- 0.3
         if score > vb:
             d_p[times[j]] += 1
         elif vb > score > -vb:
