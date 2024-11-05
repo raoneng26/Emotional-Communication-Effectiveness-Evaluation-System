@@ -331,7 +331,7 @@ def main():
         st.session_state.website =" "
         if keyword:
             st.session_state.keyword =keyword
-            website = st.selectbox('请选择爬取网站:',(' ','微博', 'Twitter'))
+            website = st.selectbox('请选择爬取网站:',(' ','微博', 'Twitter', 'Facebook'))
         else:
             website = " "
         st.session_state.website=website
@@ -384,7 +384,13 @@ def main():
                     file_clean="微博三胎政策数据/clean-微博三胎政策数据.csv"  # ------------------------更改点------------------------------
                     downloadfile_name="clean-微博三胎政策数据.csv"
                     file_path="微博三胎政策数据"   
-                    st.session_state.keyword="三胎"             
+                    st.session_state.keyword="三胎"   
+                    
+                if '网络'in keyword:
+                    file_clean="facebook网络安全数据/clean-facebook网络安全数据.csv"  # ------------------------更改点------------------------------
+                    downloadfile_name="clean-facebook网络安全数据.csv"
+                    file_path="facebook网络安全数据"   
+                    st.session_state.keyword="网络" 
 
                 # path=file_path
                 # # 对字典进行排序
