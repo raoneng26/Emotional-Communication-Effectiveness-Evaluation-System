@@ -467,7 +467,7 @@ def analysis(side_bar,uploaded_file):
             st.session_state.post_url['2024-06-15']='https://facebook.com/story.php?story_fbid=pfbid02JE6tAXHXnAL2pvpyRNWXeGjXwHWiiByBRPvbThDr9o1sXkYL31SszaeuxnSbzc8El&id=100092945240607'
             st.session_state.post_url['2024-06-16']='https://facebook.com/story.php?story_fbid=pfbid02K4NbN6sv7ovtB9XsBdxbqU9WGLgKLqgucvCdgx1eAztk5JNeXyc5AEjSseyvnqqol&id=100000682863575'
             st.session_state.post_url['2024-06-18']='https://facebook.com/story.php?story_fbid=pfbid029B8T2JGu7DAfqsN8oK2AnM3YDGXWem2Jx3QYmuKuBNarM9HTZqcWtAAKSptt6J6tl&id=100044582072702'
-            st.session_state.post_url['2024-06-19']='https://facebook.com/story.php?story_fbid=pfbid029B8T2JGu7DAfqsN8oK2AnM3YDGXWem2Jx3QYmuKuBNarM9HTZqcWtAAKSptt6J6tl&id=100044582072702'
+            st.session_state.post_url['2024-06-19']='https://facebook.com/story.php?story_fbid=pfbid02vzYCopEu87kj6hFomfWNCyxZvGRFKD42weJuWjWfqLQ9R1WD8yxaepkbMRmjhTucl&id=100053584873398'
 
         # colors = ['green' if v > 0 else 'yellow' if v == 0 else 'red' for v in list(dp.values())]
         imageUrls = [
