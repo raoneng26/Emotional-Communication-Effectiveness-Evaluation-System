@@ -193,7 +193,7 @@ def report_show():
 
     if "网络" in st.session_state.file_in.name:
         # reporturl=r"https://drive.google.com/file/d/1BVOOybmUD7Dd6hyKJPRTOC2NALh80Qi5/view?usp=sharing"
-        reporturl=r'#'
+        reporturl=r'https://smallpdf.com/cn/file#s=92f48c9b-d9c1-4d64-a2b2-8b5582b69e88'
         
     with open(reportpath1, "rb") as f:
         data = f.read()
