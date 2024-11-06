@@ -79,15 +79,15 @@ def analysis(side_bar,uploaded_file):
         st.session_state.name=None
         url_wl_P=[
             'https://facebook.com/story.php?story_fbid=pfbid025STRYCt3DqJNKB4SMjoDFQJGzbuWhfLyGDYGL7zcF4t2PLiEU2X4CjS9dVarppyZl&id=100064837862450',
+            'https://facebook.com/story.php?story_fbid=pfbid02mQYrx2tGo7CTdrUYpi63Mw4Jumj2zaXBd67a8Pc9zPcCghyBTh27yfKsYwsW1zTMl&id=100064837862450',
+            'https://facebook.com/story.php?story_fbid=pfbid02mQYrx2tGo7CTdrUYpi63Mw4Jumj2zaXBd67a8Pc9zPcCghyBTh27yfKsYwsW1zTMl&id=100064837862450',
+            'https://facebook.com/story.php?story_fbid=pfbid02mQYrx2tGo7CTdrUYpi63Mw4Jumj2zaXBd67a8Pc9zPcCghyBTh27yfKsYwsW1zTMl&id=100064837862450',
+            'https://facebook.com/story.php?story_fbid=pfbid02aGMUtr7odbqiTLgi6UqvLGg4t5VUog1nDky9NQFZxyw1xg1Xo5A1cJwgQsYra7uCl&id=100064837862450',
             'https://facebook.com/story.php?story_fbid=pfbid025STRYCt3DqJNKB4SMjoDFQJGzbuWhfLyGDYGL7zcF4t2PLiEU2X4CjS9dVarppyZl&id=100064837862450',
             'https://facebook.com/story.php?story_fbid=pfbid025STRYCt3DqJNKB4SMjoDFQJGzbuWhfLyGDYGL7zcF4t2PLiEU2X4CjS9dVarppyZl&id=100064837862450',
             'https://facebook.com/story.php?story_fbid=pfbid025STRYCt3DqJNKB4SMjoDFQJGzbuWhfLyGDYGL7zcF4t2PLiEU2X4CjS9dVarppyZl&id=100064837862450',
-            'https://facebook.com/story.php?story_fbid=pfbid025STRYCt3DqJNKB4SMjoDFQJGzbuWhfLyGDYGL7zcF4t2PLiEU2X4CjS9dVarppyZl&id=100064837862450',
-            'https://facebook.com/story.php?story_fbid=pfbid025STRYCt3DqJNKB4SMjoDFQJGzbuWhfLyGDYGL7zcF4t2PLiEU2X4CjS9dVarppyZl&id=100064837862450',
-            'https://facebook.com/story.php?story_fbid=pfbid025STRYCt3DqJNKB4SMjoDFQJGzbuWhfLyGDYGL7zcF4t2PLiEU2X4CjS9dVarppyZl&id=100064837862450',
-            'https://facebook.com/story.php?story_fbid=pfbid025STRYCt3DqJNKB4SMjoDFQJGzbuWhfLyGDYGL7zcF4t2PLiEU2X4CjS9dVarppyZl&id=100064837862450',
-            'https://facebook.com/story.php?story_fbid=pfbid025STRYCt3DqJNKB4SMjoDFQJGzbuWhfLyGDYGL7zcF4t2PLiEU2X4CjS9dVarppyZl&id=100064837862450',
-            'https://facebook.com/story.php?story_fbid=pfbid025STRYCt3DqJNKB4SMjoDFQJGzbuWhfLyGDYGL7zcF4t2PLiEU2X4CjS9dVarppyZl&id=100064837862450',
+            'https://facebook.com/story.php?story_fbid=pfbid02aGMUtr7odbqiTLgi6UqvLGg4t5VUog1nDky9NQFZxyw1xg1Xo5A1cJwgQsYra7uCl&id=100064837862450',
+            'https://facebook.com/story.php?story_fbid=pfbid02aGMUtr7odbqiTLgi6UqvLGg4t5VUog1nDky9NQFZxyw1xg1Xo5A1cJwgQsYra7uCl&id=100064837862450',
         ]
         url_wl_P.reverse()
         
@@ -121,18 +121,16 @@ def analysis(side_bar,uploaded_file):
         url_yq_P.reverse()
         
         url_wl_N=[
-            'https://facebook.com/story.php?story_fbid=pfbid025STRYCt3DqJNKB4SMjoDFQJGzbuWhfLyGDYGL7zcF4t2PLiEU2X4CjS9dVarppyZl&id=100064837862450',
-            'https://facebook.com/story.php?story_fbid=pfbid025STRYCt3DqJNKB4SMjoDFQJGzbuWhfLyGDYGL7zcF4t2PLiEU2X4CjS9dVarppyZl&id=100064837862450',
-            'https://facebook.com/story.php?story_fbid=pfbid025STRYCt3DqJNKB4SMjoDFQJGzbuWhfLyGDYGL7zcF4t2PLiEU2X4CjS9dVarppyZl&id=100064837862450',
-            'https://facebook.com/story.php?story_fbid=pfbid025STRYCt3DqJNKB4SMjoDFQJGzbuWhfLyGDYGL7zcF4t2PLiEU2X4CjS9dVarppyZl&id=100064837862450',
-            'https://facebook.com/story.php?story_fbid=pfbid025STRYCt3DqJNKB4SMjoDFQJGzbuWhfLyGDYGL7zcF4t2PLiEU2X4CjS9dVarppyZl&id=100064837862450',
-            'https://facebook.com/story.php?story_fbid=pfbid025STRYCt3DqJNKB4SMjoDFQJGzbuWhfLyGDYGL7zcF4t2PLiEU2X4CjS9dVarppyZl&id=100064837862450',
-            'https://facebook.com/story.php?story_fbid=pfbid025STRYCt3DqJNKB4SMjoDFQJGzbuWhfLyGDYGL7zcF4t2PLiEU2X4CjS9dVarppyZl&id=100064837862450',
-            'https://facebook.com/story.php?story_fbid=pfbid025STRYCt3DqJNKB4SMjoDFQJGzbuWhfLyGDYGL7zcF4t2PLiEU2X4CjS9dVarppyZl&id=100064837862450',
-            'https://facebook.com/story.php?story_fbid=pfbid025STRYCt3DqJNKB4SMjoDFQJGzbuWhfLyGDYGL7zcF4t2PLiEU2X4CjS9dVarppyZl&id=100064837862450',
-            'https://facebook.com/story.php?story_fbid=pfbid025STRYCt3DqJNKB4SMjoDFQJGzbuWhfLyGDYGL7zcF4t2PLiEU2X4CjS9dVarppyZl&id=100064837862450',
-
-            
+            'https://facebook.com/story.php?story_fbid=pfbid0HjFrM1YfjkoCuJosRnvaFwdjewhhuhZWc7rAeepVSnoXX5r8cjjSNfLWesCaXnq9l&id=100047112765345',
+            'https://facebook.com/story.php?story_fbid=pfbid02GorNggaiLHTHQxmcgU75btcqA9ScYU1XTQwkAnwDTywL9RT2s7SAbwREYQ5SxSRgl&id=100059422245844',
+            'https://facebook.com/story.php?story_fbid=pfbid024orc55f1qK4po9PY2FYNuwYqi5g43HvemV5DGEQsZUFoo8b34n1kAxwonA8bo13kl&id=100064391875569',
+            'https://facebook.com/story.php?story_fbid=pfbid024orc55f1qK4po9PY2FYNuwYqi5g43HvemV5DGEQsZUFoo8b34n1kAxwonA8bo13kl&id=100064391875569',
+            'https://facebook.com/story.php?story_fbid=pfbid0HDYxDtFyDswmUatSR1NyVRaEvyyWwBYFifWhhvMZfLZTmhzwsJWMnSoKqWB4fSiKl&id=100059551808655',
+            'https://facebook.com/story.php?story_fbid=pfbid03vKo5si5TeykWmq3gS9C53ssSHjAFZ2AmgKiZdt6ejaMkQV73EJmU4wAVAPZodJYl&id=100059422245844',
+            'https://facebook.com/story.php?story_fbid=pfbid0PYApJEuPkoWKwqbCDjwqN1Ur8h2Un4WThityEbPWtBrDq4eg6oVWXf2iERGERYztl&id=100059422245844',
+            'https://facebook.com/story.php?story_fbid=pfbid037WNKpkKWyhgJEpnSjeZ7E7LJkcHozFhyRxJ2ubVWgHv8UdFTJYKCvieJbLmepAeYl&id=100063679001455',
+            'https://facebook.com/story.php?story_fbid=pfbid0MEBdpoET2uYqxR1fLdB3k9do35vYXPPxkHW6t3UiNtCNGrKZY9PnmWJujfxMeg3gl&id=100059479812265',
+            'https://facebook.com/story.php?story_fbid=pfbid08hVxeFE5fQZaQ5R2r4TBM3HyFLbzCMyduJ9sEQiCtdCudygDpykzpAsfzAZJVFHdl&id=100059456532991', 
         ]
 
         url_hfs_N=[
