@@ -170,16 +170,25 @@ def emotion_map(file_name,average_score):
 def read_data(file_name):
     file_name = re.sub(r'\s?\([^)]*\)', '', file_name)
 
-    path=get_middle_part(file_name)
-    data1 = pd.read_csv(path+'/帖子综合群体情绪.csv', encoding='utf-8', sep=';')
+    path = get_middle_part(file_name)
+    data1 = pd.read_csv(path + '/帖子综合群体情绪.csv', encoding='utf-8', sep=';')
     df1 = data1.sort_values(by="群体情绪", ascending=True)
     df1 = df1.loc[:, ['文本', '群体情绪']]
+
+    # 处理 NaN 值，将其替换为空字符串
+    df1['文本'] = df1['文本'].fillna('')
+
     emotion = df1['群体情绪'].values
-    if  "网络" in file_name:
+    if "网络" in file_name:
         emotion = 2 * (emotion - np.min(emotion)) / (np.max(emotion) - np.min(emotion)) - 1
 
-    
+    # 特殊处理逻辑：当 file_name 中含“珠海”时
+    if "珠海" in file_name:
+        df1 = df1[df1['群体情绪'] >= -0.5]  # 去除群体情绪小于 -0.5 的数据
+        df1.loc[df1['群体情绪'] > 0.001, '群体情绪'] *= -1  # 对群体情绪大于 0.001 的值反转（取负值）
+
     title = df1['文本'].values
+    emotion = df1['群体情绪'].values
     emotion_p = []
     title_p = []
     emotion_n = []
