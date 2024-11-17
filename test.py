@@ -65,8 +65,9 @@ def normalize_location_names(locations):
 # )
 
 def analysis(side_bar,uploaded_file):
-    
-    st.session_state.average_score= 画图.calculate_score_and_average(uploaded_file.name)
+    if  '珠海' not in uploaded_file.name:
+        st.session_state.average_score= 画图.calculate_score_and_average(uploaded_file.name)
+
     
 
     if side_bar == '群体情绪排行榜':
