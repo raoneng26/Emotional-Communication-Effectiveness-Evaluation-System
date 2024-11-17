@@ -336,7 +336,7 @@ def main():
         st.session_state.website =" "
         if keyword:
             st.session_state.keyword =keyword
-            website = st.selectbox('请选择爬取网站:',(' ','所有平台','哔哩哔哩','抖音','快手','贴吧','微博','小红书','知乎', 'Twitter','Facebook'))
+            website = st.selectbox('请选择爬取网站:',(' ','哔哩哔哩','抖音','快手','贴吧','微博','小红书','知乎', 'Twitter','Facebook'))
         else:
             website = " "
         st.session_state.website=website
