@@ -610,12 +610,14 @@ def main():
                             
                             orifile=path1+"/"+path1.replace("数据", "")+'.csv'
                             # orifile="D:\电磁辐射网络舆情分析系统\code\微博日本核污水排放.csv"
-                            
-                            post_all,post_poster=find_imppost_data(uploaded_file4.name)
-                            if "三胎" not in uploaded_file4.name:
-                                st.session_state.post_url=match_url(post_poster,orifile)
-                            else:
+                            if "珠海" in uploaded_file4.name:
                                 st.session_state.post_url=None
+                            else:
+                                post_all,post_poster=find_imppost_data(uploaded_file4.name)
+                                if "三胎" not in uploaded_file4.name:
+                                    st.session_state.post_url=match_url(post_poster,orifile)
+                                else:
+                                    st.session_state.post_url=None
                             st.success('upload success!')       
                             analysis('群体情绪趋势图',uploaded_file4)
                             unploaded_in.empty()
@@ -631,11 +633,14 @@ def main():
                         orifile=path1+"/"+path1.replace("数据", "")+'.csv'
                         
                         # orifile="D:\电磁辐射网络舆情分析系统\code\微博日本核污水排放.csv"
-                        post_all,post_poster=find_imppost_data(uploaded_file4.name)
-                        if "三胎" not in uploaded_file4.name:
-                            st.session_state.post_url=match_url(post_poster,orifile)
-                        else:
+                        if "珠海" in uploaded_file4.name:
                             st.session_state.post_url=None
+                        else:
+                            post_all,post_poster=find_imppost_data(uploaded_file4.name)
+                            if "三胎" not in uploaded_file4.name:
+                                st.session_state.post_url=match_url(post_poster,orifile)
+                            else:
+                                st.session_state.post_url=None
                         analysis('群体情绪趋势图',uploaded_file4)
                     
                         if st.session_state.data:
