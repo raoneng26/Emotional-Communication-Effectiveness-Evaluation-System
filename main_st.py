@@ -311,6 +311,9 @@ def match_url(dict_, csv_file):
     return result_dict
 
 def generate_post_url(file_path):
+    import pandas as pd
+    import streamlit as st
+    
     # 读取 CSV 文件
     df = pd.read_csv(file_path, encoding='utf-8')
 
@@ -318,8 +321,15 @@ def generate_post_url(file_path):
     if 'post_url' not in st.session_state:
         st.session_state.post_url = {}
 
-    # 将“发布时间”转换为日期格式
-    df['发布时间'] = pd.to_datetime(df['发布时间']).dt.date
+    # 清洗并转换“发布时间”列
+    # 非法值将被设置为 NaT
+    df['发布时间'] = pd.to_datetime(df['发布时间'], errors='coerce')
+
+    # 删除无法解析为日期的行
+    df = df.dropna(subset=['发布时间'])
+
+    # 只提取日期部分
+    df['发布时间'] = df['发布时间'].dt.date
 
     # 按日期分组，并找到每组中“评论数”最大的行
     max_comments_per_day = df.loc[df.groupby('发布时间')['评论数'].idxmax()]
@@ -330,9 +340,6 @@ def generate_post_url(file_path):
             st.session_state.post_url[str(row['发布时间'])] = row['url链接']
         else:
             st.session_state.post_url[str(row['发布时间'])] = "#"
-
-    # 打印 st.session_state.post_url 内容以确认
-    print(st.session_state.post_url)
 
 
 def main():
