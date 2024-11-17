@@ -326,7 +326,10 @@ def generate_post_url(file_path):
 
     # 将结果添加到 st.session_state.post_url 中
     for index, row in max_comments_per_day.iterrows():
-        st.session_state.post_url[str(row['发布时间'])] = row['url链接']
+        if pd.notna(row['url链接']):
+            st.session_state.post_url[str(row['发布时间'])] = row['url链接']
+        else:
+            st.session_state.post_url[str(row['发布时间'])] = "#"
 
     # 打印 st.session_state.post_url 内容以确认
     print(st.session_state.post_url)
