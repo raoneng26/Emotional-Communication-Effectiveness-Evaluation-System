@@ -510,7 +510,11 @@ def main():
                 # st.session_state.url_pdf=url_pdf
 
                 st.session_state.file_clean=file_clean
-                clean_data = pd.read_csv(file_clean, encoding='utf-8', sep=';')
+                try:
+                    clean_data = pd.read_csv(file_clean, encoding='utf-8', sep=',')
+                except:
+                    clean_data = pd.read_csv(file_clean, encoding='utf-8', sep=';')
+
                 st.write(' ')
                 csv_clean_data = clean_data.to_csv(index=False)
 
