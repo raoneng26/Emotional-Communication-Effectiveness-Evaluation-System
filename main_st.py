@@ -336,12 +336,29 @@ def main():
         st.session_state.website =" "
         if keyword:
             st.session_state.keyword =keyword
-            website = st.selectbox('请选择爬取网站:',(' ','微博', 'Twitter', 'Facebook'))
+            website = st.selectbox('请选择爬取网站:',(' ','所有平台','哔哩哔哩','抖音','快手','贴吧','微博','小红书','知乎', 'Twitter','Facebook'))
         else:
             website = " "
         st.session_state.website=website
         if website != ' ':       
-            file1 = '微博' + keyword + '数据.csv'
+            if website ==   '微博':
+                file1 = '微博' + keyword + '数据.csv'
+            elif website ==   'Facebook':
+                file1 = 'Facebook' + keyword + '数据.csv'
+            elif website ==   '哔哩哔哩':
+                file1 = '哔哩哔哩' + keyword + '数据.csv'
+            elif website ==   '抖音':
+                file1 = '抖音' + keyword + '数据.csv'
+            elif website ==   '快手':
+                file1 = '快手' + keyword + '数据.csv'
+            elif website ==   '贴吧':
+                file1 = '贴吧' + keyword + '数据.csv'
+            elif website ==   '小红书':
+                file1 = '小红书' + keyword + '数据.csv'
+            elif website ==   '知乎':
+                file1 = '知乎' + keyword + '数据.csv'
+            elif website ==   '所有平台':
+                file1 = '所有平台' + keyword + '数据.csv'
             with open(file1, "a+", errors="ignore", newline='', encoding='utf-8') as f:
                 with open('progress_bar.css', 'r',) as f:
                     st.markdown('<style>{}</style>'.format(f.read()), unsafe_allow_html=True)
@@ -396,6 +413,33 @@ def main():
                     downloadfile_name="clean-facebook网络安全数据.csv"
                     file_path="facebook网络安全数据"   
                     st.session_state.keyword="网络" 
+                    
+                if '珠海'in keyword:
+                    if website ==   '哔哩哔哩':
+                        file_clean="哔哩哔哩珠海撞人数据/clean-哔哩哔哩珠海撞人数据.csv"  # ------------------------更改点------------------------------
+                        downloadfile_name="哔哩哔哩珠海撞人数据/clean-哔哩哔哩珠海撞人数据.csv" 
+                    if website ==   '抖音':
+                        file_clean="抖音珠海撞人数据/clean-抖音珠海撞人数据.csv"  # ------------------------更改点------------------------------
+                        downloadfile_name="抖音珠海撞人数据/clean-抖音珠海撞人数据.csv" 
+                    if website ==   '快手':
+                        file_clean="快手珠海撞人数据/clean-快手珠海撞人数据.csv"  # ------------------------更改点------------------------------
+                        downloadfile_name="快手珠海撞人数据/clean-快手珠海撞人数据.csv" 
+                    if website ==   '贴吧':
+                        file_clean="贴吧珠海撞人数据/clean-贴吧珠海撞人数据.csv"  # ------------------------更改点------------------------------
+                        downloadfile_name="贴吧珠海撞人数据/clean-贴吧珠海撞人数据.csv" 
+                    if website ==   '微博':
+                        file_clean="微博珠海撞人数据/clean-微博珠海撞人数据.csv"  # ------------------------更改点------------------------------
+                        downloadfile_name="微博珠海撞人数据/clean-微博珠海撞人数据.csv" 
+                    if website ==   '小红书':
+                        file_clean="小红书珠海撞人数据/clean-小红书珠海撞人数据.csv"  # ------------------------更改点------------------------------
+                        downloadfile_name="小红书珠海撞人数据/clean-小红书珠海撞人数据.csv" 
+                    if website ==   '知乎':
+                        file_clean="知乎珠海撞人数据/clean-知乎珠海撞人数据.csv"  # ------------------------更改点------------------------------
+                        downloadfile_name="知乎珠海撞人数据/clean-知乎珠海撞人数据.csv"                     
+                    if website ==   '所有平台':
+                        file_clean="所有平台珠海撞人数据/clean-所有平台珠海撞人数据.csv"  # ------------------------更改点------------------------------
+                        downloadfile_name="所有平台珠海撞人数据/clean-所有平台珠海撞人数据.csv"      
+                    st.session_state.keyword="珠海"
 
                 # path=file_path
                 # # 对字典进行排序
