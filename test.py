@@ -160,7 +160,19 @@ def analysis(side_bar,uploaded_file):
             'https://weibo.com/6859841043/NqhiNbJCi?refer_flag=1001030103_',
         ]
         url_yq_P.reverse()
-        
+        url_zh_P=[
+            'https://weibo.com/2311965983/P006gBJME?refer_flag=1001030103_',
+            'https://weibo.com/6586305031/P04qrEfhh?refer_flag=1001030103_',
+            'https://weibo.com/6901760711/P03g00GSv?refer_flag=1001030103_',
+            'https://weibo.com/6586305031/P04qrEfhh?refer_flag=1001030103_',
+            'https://weibo.com/5403964641/P00O7r8Tm?refer_flag=1001030103_',
+            'https://weibo.com/5634865334/OFWRGeyMJ?refer_flag=1001030103_',
+            'https://weibo.com/2169306777/OFXeBCVzI?refer_flag=1001030103_',
+            'https://weibo.com/6586305031/P004Kb8eE?refer_flag=1001030103_',
+            'https://weibo.com/7546573234/OFWQMbwA0?refer_flag=1001030103_',
+            'https://weibo.com/7612462543/OFWQBw0oW?refer_flag=1001030103_',
+        ]
+        url_wl_P.reverse()
         url_wl_N=[
             'https://facebook.com/story.php?story_fbid=pfbid0HjFrM1YfjkoCuJosRnvaFwdjewhhuhZWc7rAeepVSnoXX5r8cjjSNfLWesCaXnq9l&id=100047112765345',
             'https://facebook.com/story.php?story_fbid=pfbid02GorNggaiLHTHQxmcgU75btcqA9ScYU1XTQwkAnwDTywL9RT2s7SAbwREYQ5SxSRgl&id=100059422245844',
@@ -225,6 +237,18 @@ def analysis(side_bar,uploaded_file):
             'https://weibo.com/7898673356/NCtjaF4BL',
             'https://weibo.com/7898673356/NCtjqDB54','#','#',
         ]
+        url_zh_N=[
+            'https://weibo.com/6310980261/P00h2ye0x?refer_flag=1001030103_',
+            'https://weibo.com/3775056661/OFWrdpLR6?refer_flag=1001030103_',
+            'https://weibo.com/3166052113/P04cVCdG2?refer_flag=1001030103_',
+            'https://weibo.com/7376126187/OFWPbzdGY?refer_flag=1001030103_',
+            'https://weibo.com/1566165751/OFWRzrOUC?refer_flag=1001030103_',
+            'https://weibo.com/3775056661/OFWrdpLR6?refer_flag=1001030103_',
+            'https://weibo.com/7612462543/OFWQBw0oW?refer_flag=1001030103_',
+            'https://weibo.com/6622446302/P05jeADMJ?refer_flag=1001030103_',
+            'https://weibo.com/2178514797/P006FnMVu?refer_flag=1001030103_',
+            'https://weibo.com/6524492436/P06igDMNE?refer_flag=1001030103_',
+        ]
         if "疫情"in uploaded_file.name:
             url_P=url_yq_P
             url_N=url_yq_N 
@@ -241,8 +265,12 @@ def analysis(side_bar,uploaded_file):
             url_N=url_wl_N
 
         if "珠海"in uploaded_file.name:
-            url_P=st.session_state.url_P
-            url_N=st.session_state.url_N
+            if "微博" in uploaded_file.name:
+                url_P=url_zh_P
+                url_N=url_zh_N
+            else:
+                url_P=st.session_state.url_P
+                url_N=st.session_state.url_N
 
         if st.session_state.p2=="正面":
             st.session_state.img=[
