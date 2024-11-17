@@ -276,11 +276,18 @@ def analysis(side_bar,uploaded_file):
 
 
     if side_bar == '群体情绪中国地图':
-        dic = 画图.emotion_map(uploaded_file.name,st.session_state.average_score)  # 第一次分析地图时使用
+        # dic = 画图.emotion_map(uploaded_file.name,st.session_state.average_score)  # 第一次分析地图时使用
         path1=get_middle_part(uploaded_file.name)
-        with open(path1+"/map_result.txt",  encoding='utf-8') as file1: 
-            str1 = file1.read()  # 读取文件内容
-            dic = eval("{" + str1 + "}")
+        if '珠海' in uploaded_file.name:
+            df = pd.read_csv(path1 + "/map_result.csv", encoding='utf-8')
+            # 提取“评论属地”和“总平均值”列
+            result = df[['评论属地', '总平均值']]
+            # 将结果转换为字典
+            dic = dict(zip(result['评论属地'], result['总平均值']))
+        else:
+            with open(path1+"/map_result.txt",  encoding='utf-8') as file1: 
+                str1 = file1.read()  # 读取文件内容
+                dic = eval("{" + str1 + "}")
         dic1=normalize_location_names(dic)
         # 将dic1中的每个值减去0.5
         # dic1 = {k: v - 0.5  for k, v in dic1.items()}
