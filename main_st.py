@@ -310,6 +310,27 @@ def match_url(dict_, csv_file):
     # print(result_dict)
     return result_dict
 
+def generate_post_url(file_path):
+    # 读取 CSV 文件
+    df = pd.read_csv(file_path, encoding='utf-8')
+
+    # 确保 st.session_state.post_url 字典已初始化
+    if 'post_url' not in st.session_state:
+        st.session_state.post_url = {}
+
+    # 将“发布时间”转换为日期格式
+    df['发布时间'] = pd.to_datetime(df['发布时间']).dt.date
+
+    # 按日期分组，并找到每组中“评论数”最大的行
+    max_comments_per_day = df.loc[df.groupby('发布时间')['评论数'].idxmax()]
+
+    # 将结果添加到 st.session_state.post_url 中
+    for index, row in max_comments_per_day.iterrows():
+        st.session_state.post_url[str(row['发布时间'])] = row['url链接']
+
+    # 打印 st.session_state.post_url 内容以确认
+    print(st.session_state.post_url)
+
 
 def main():
     initial()
@@ -609,9 +630,11 @@ def main():
                             path1=get_middle_part(uploaded_file4.name)
                             
                             orifile=path1+"/"+path1.replace("数据", "")+'.csv'
+                            clean_file=path1+"/clean-"+path1+'.csv'
                             # orifile="D:\电磁辐射网络舆情分析系统\code\微博日本核污水排放.csv"
                             if "珠海" in uploaded_file4.name:
-                                st.session_state.post_url=None
+                                generate_post_url(clean_file)
+
                             else:
                                 post_all,post_poster=find_imppost_data(uploaded_file4.name)
                                 if "三胎" not in uploaded_file4.name:
@@ -631,10 +654,10 @@ def main():
                         path1=get_middle_part(uploaded_file4.name)
                         
                         orifile=path1+"/"+path1.replace("数据", "")+'.csv'
-                        
+                        clean_file=path1+"/clean-"+path1+'.csv'
                         # orifile="D:\电磁辐射网络舆情分析系统\code\微博日本核污水排放.csv"
                         if "珠海" in uploaded_file4.name:
-                            st.session_state.post_url=None
+                            generate_post_url(clean_file)
                         else:
                             post_all,post_poster=find_imppost_data(uploaded_file4.name)
                             if "三胎" not in uploaded_file4.name:
