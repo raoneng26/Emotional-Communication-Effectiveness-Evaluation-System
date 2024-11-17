@@ -76,19 +76,19 @@ def find_urls(file_path, title_P, title_N):
     url_P = []
     for title in title_P:
         url = df[df['文本'] == title]['url链接'].values
-        if len(url) > 0:
+        if len(url) > 0 and pd.notna(url[0]):
             url_P.append(url[0])
         else:
-            url_P.append(None)
+            url_P.append("#")
 
     # 查找负面情绪文本对应的 URL
     url_N = []
     for title in title_N:
         url = df[df['文本'] == title]['url链接'].values
-        if len(url) > 0:
+        if len(url) > 0 and pd.notna(url[0]):
             url_N.append(url[0])
         else:
-            url_N.append(None)
+            url_N.append("#")
 
     # 将结果添加到 st.session_state
     st.session_state.url_P = url_P
@@ -97,6 +97,7 @@ def find_urls(file_path, title_P, title_N):
     # 打印结果以确认
     print("Positive URLs:", st.session_state.url_P)
     print("Negative URLs:", st.session_state.url_N)
+
 
 
 def analysis(side_bar,uploaded_file):
