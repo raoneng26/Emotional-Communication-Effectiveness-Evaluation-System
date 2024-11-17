@@ -531,6 +531,12 @@ def analysis(side_bar,uploaded_file):
             st.session_state.post_url['2024-06-16']='https://facebook.com/story.php?story_fbid=pfbid02K4NbN6sv7ovtB9XsBdxbqU9WGLgKLqgucvCdgx1eAztk5JNeXyc5AEjSseyvnqqol&id=100000682863575'
             st.session_state.post_url['2024-06-18']='https://facebook.com/story.php?story_fbid=pfbid029B8T2JGu7DAfqsN8oK2AnM3YDGXWem2Jx3QYmuKuBNarM9HTZqcWtAAKSptt6J6tl&id=100044582072702'
             st.session_state.post_url['2024-06-19']='https://facebook.com/story.php?story_fbid=pfbid02vzYCopEu87kj6hFomfWNCyxZvGRFKD42weJuWjWfqLQ9R1WD8yxaepkbMRmjhTucl&id=100053584873398'
+        if "珠海" and "微博" in  uploaded_file.name:
+            st.session_state.post_url['2024-11-11']='https://weibo.com/2028810631/OFO1hcC83?refer_flag=1001030103_'
+            st.session_state.post_url['2024-11-12']='https://weibo.com/1662214194/OFXb1CwAV?refer_flag=1001030103_'
+            st.session_state.post_url['2024-11-13']='https://weibo.com/2889942201/P06zsuffP?refer_flag=1001030103_'
+            st.session_state.post_url['2024-11-14']='https://weibo.com/1823630913/P0dCipb1Q?refer_flag=1001030103_'
+            st.session_state.post_url['2024-11-15']='https://weibo.com/7295655721/P0q0jfVQb?refer_flag=1001030103_'
 
         # colors = ['green' if v > 0 else 'yellow' if v == 0 else 'red' for v in list(dp.values())]
         imageUrls = [
