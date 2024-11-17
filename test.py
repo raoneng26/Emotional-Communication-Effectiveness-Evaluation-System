@@ -64,6 +64,41 @@ def normalize_location_names(locations):
 #     ['群体情绪排行榜', '群体情绪中国地图', '集群密度排行', '点赞评论转发占比图', '群体情绪趋势图']
 # )
 
+def find_urls(file_path, title_P, title_N):
+    # 读取 CSV 文件
+    df = pd.read_csv(file_path, encoding='utf-8')
+
+    # 确保 st.session_state.post_url 字典已初始化
+    if 'post_url' not in st.session_state:
+        st.session_state.post_url = {}
+
+    # 查找正面情绪文本对应的 URL
+    url_P = []
+    for title in title_P:
+        url = df[df['文本'] == title]['url链接'].values
+        if len(url) > 0:
+            url_P.append(url[0])
+        else:
+            url_P.append(None)
+
+    # 查找负面情绪文本对应的 URL
+    url_N = []
+    for title in title_N:
+        url = df[df['文本'] == title]['url链接'].values
+        if len(url) > 0:
+            url_N.append(url[0])
+        else:
+            url_N.append(None)
+
+    # 将结果添加到 st.session_state
+    st.session_state.url_P = url_P
+    st.session_state.url_N = url_N
+
+    # 打印结果以确认
+    print("Positive URLs:", st.session_state.url_P)
+    print("Negative URLs:", st.session_state.url_N)
+
+
 def analysis(side_bar,uploaded_file):
     if  '珠海' not in uploaded_file.name:
         st.session_state.average_score= 画图.calculate_score_and_average(uploaded_file.name)
@@ -76,8 +111,12 @@ def analysis(side_bar,uploaded_file):
         title_N, emotion_N = title_N[:10], emotion_N[:10]  # 只选择前10个负面情绪
         st.session_state.title_N=title_N
         st.session_state.title_P = title_P[::-1]
-
+        
         st.session_state.name=None
+        path1=get_middle_part(uploaded_file.name)
+        clean_file=path1+"/clean-"+path1+'.csv'
+        find_urls(clean_file, title_P, title_N)
+        
         url_wl_P=[
             'https://facebook.com/story.php?story_fbid=pfbid025STRYCt3DqJNKB4SMjoDFQJGzbuWhfLyGDYGL7zcF4t2PLiEU2X4CjS9dVarppyZl&id=100064837862450',
             'https://facebook.com/story.php?story_fbid=pfbid02mQYrx2tGo7CTdrUYpi63Mw4Jumj2zaXBd67a8Pc9zPcCghyBTh27yfKsYwsW1zTMl&id=100064837862450',
@@ -199,6 +238,10 @@ def analysis(side_bar,uploaded_file):
         if "网络" in uploaded_file.name:
             url_P=url_wl_P
             url_N=url_wl_N
+
+        if "珠海"in uploaded_file.name:
+            url_P=st.session_state.url_P
+            url_N=st.session_state.url_N
 
         if st.session_state.p2=="正面":
             st.session_state.img=[
