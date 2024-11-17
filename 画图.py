@@ -184,8 +184,8 @@ def read_data(file_name):
 
     # 特殊处理逻辑：当 file_name 中含“珠海”时
     if "珠海" in file_name:
-        df1 = df1[df1['群体情绪'] >= -0.5]  # 去除群体情绪小于 -0.5 的数据
         df1.loc[df1['群体情绪'] > 0.001, '群体情绪'] *= -1  # 对群体情绪大于 0.001 的值反转（取负值）
+        df1 = df1[df1['群体情绪'] >= -0.5]  # 去除群体情绪小于 -0.5 的数据
 
     title = df1['文本'].values
     emotion = df1['群体情绪'].values
@@ -203,6 +203,7 @@ def read_data(file_name):
             emotion_n.append(emotion[i])
             title_n.append(title[i])
     return title_p, emotion_p, title_n, emotion_n
+
 
 
 def cluster_density(file_name):
