@@ -194,7 +194,10 @@ def report_show():
     if "网络" in st.session_state.file_in.name:
         # reporturl=r"https://drive.google.com/file/d/1BVOOybmUD7Dd6hyKJPRTOC2NALh80Qi5/view?usp=sharing"
         reporturl=r'https://smallpdf.com/cn/file#s=2123ca79-4949-415c-8513-3bf73f0a6ac2'
-        
+
+    if "珠海" in st.session_state.file_in.name:
+        # reporturl=r"https://drive.google.com/file/d/1BVOOybmUD7Dd6hyKJPRTOC2NALh80Qi5/view?usp=sharing"
+        reporturl=r'https://smallpdf.com/cn/file#s=f4c51b8b-2e85-4995-b660-026a49960f8a'
     with open(reportpath1, "rb") as f:
         data = f.read()
         encoded = base64.b64encode(data)
