@@ -594,6 +594,13 @@ def analysis(side_bar,uploaded_file):
             st.session_state.post_url['2024-11-13']='https://weibo.com/2889942201/P06zsuffP?refer_flag=1001030103_'
             st.session_state.post_url['2024-11-14']='https://weibo.com/1823630913/P0dCipb1Q?refer_flag=1001030103_'
             st.session_state.post_url['2024-11-15']='https://weibo.com/7295655721/P0q0jfVQb?refer_flag=1001030103_'
+            
+        if "珠海" and "所有" in  uploaded_file.name:
+            st.session_state.post_url['2024-11-11']='https://www.bilibili.com/video/av113464647420177/'
+            st.session_state.post_url['2024-11-12']='https://www.douyin.com/video/7436351094868970788'
+            st.session_state.post_url['2024-11-13']='https://www.douyin.com/video/7436650235683753253'
+            st.session_state.post_url['2024-11-14']='https://www.bilibili.com/video/av113478656397749/'
+            st.session_state.post_url['2024-11-15']='https://www.bilibili.com/video/av113486558467248/'
 
         # colors = ['green' if v > 0 else 'yellow' if v == 0 else 'red' for v in list(dp.values())]
         imageUrls = [
