@@ -444,14 +444,18 @@ def analysis(side_bar,uploaded_file):
 
 
     if side_bar == '群体情绪趋势图':
-        dp, dz, dn = 画图.emotion_tendency(uploaded_file.name,st.session_state.average_score)
-        # print(dp, dz, dn)
-        # dtemp=dp
-        # dtemp2=dz
-        # dp=dn
-        # dn=dtemp
-        # dz=dp
-        # dp=dtemp2
+        if "珠海" in uploaded_file.name:
+            path1 = get_middle_part(uploaded_file.name)
+            df = pd.read_csv(path1 + "/data_num.csv", encoding='utf-8')
+
+            # 提取数据
+            dp = df[df['情绪类型'] == '正面'].iloc[:, 1:-1].to_dict(orient='records')[0]
+            dz = df[df['情绪类型'] == '中性'].iloc[:, 1:-1].to_dict(orient='records')[0]
+            dn = df[df['情绪类型'] == '负面'].iloc[:, 1:-1].to_dict(orient='records')[0]
+
+        else:
+            dp, dz, dn = 画图.emotion_tendency(uploaded_file.name,st.session_state.average_score)
+            # print(dp,dz,dn)
 
         if st.session_state.post_url is None:
             st.session_state.post_url = {k: "#" for k in dp.keys()}
