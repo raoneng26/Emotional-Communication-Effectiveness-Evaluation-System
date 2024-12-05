@@ -108,16 +108,27 @@ def analysis(side_bar,uploaded_file):
 
     if side_bar == '群体情绪排行榜':
         title_P, emotion_P, title_N, emotion_N = 画图.read_data(uploaded_file.name)
-        title_P, emotion_P = title_P[-10:], emotion_P[-10:]  # 只选择前10个正面情绪
-        title_N, emotion_N = title_N[:10], emotion_N[:10]  # 只选择前10个负面情绪
+        # 对正面情绪进行排序，按情绪值从大到小排序
+        sorted_positives = sorted(zip(emotion_P, title_P), key=lambda x: x[0], reverse=True)
+        emotion_P_sorted, title_P_sorted = zip(*sorted_positives)
+
+        # 对负面情绪进行排序，按情绪值从小到大排序
+        sorted_negatives = sorted(zip(emotion_N, title_N), key=lambda x: x[0])
+        emotion_N_sorted, title_N_sorted = zip(*sorted_negatives)
+
+        # 选择前10个数据
+        title_P, emotion_P = title_P_sorted[:10], emotion_P_sorted[:10]
+        title_N, emotion_N = title_N_sorted[:10], emotion_N_sorted[:10]
+
         st.session_state.title_N=title_N
-        st.session_state.title_P = title_P[::-1]
-        
+        st.session_state.title_P =title_P
+
         st.session_state.name=None
         path1=get_middle_part(uploaded_file.name)
         clean_file=path1+"/clean-"+path1+'.csv'
-        find_urls(clean_file, title_P, title_N)
-        
+        if '珠海' in uploaded_file.name:
+            find_urls(clean_file, title_P, title_N)
+
         url_wl_P=[
             'https://facebook.com/story.php?story_fbid=pfbid025STRYCt3DqJNKB4SMjoDFQJGzbuWhfLyGDYGL7zcF4t2PLiEU2X4CjS9dVarppyZl&id=100064837862450',
             'https://facebook.com/story.php?story_fbid=pfbid02mQYrx2tGo7CTdrUYpi63Mw4Jumj2zaXBd67a8Pc9zPcCghyBTh27yfKsYwsW1zTMl&id=100064837862450',
@@ -130,7 +141,7 @@ def analysis(side_bar,uploaded_file):
             'https://facebook.com/story.php?story_fbid=pfbid02aGMUtr7odbqiTLgi6UqvLGg4t5VUog1nDky9NQFZxyw1xg1Xo5A1cJwgQsYra7uCl&id=100064837862450',
             'https://facebook.com/story.php?story_fbid=pfbid02aGMUtr7odbqiTLgi6UqvLGg4t5VUog1nDky9NQFZxyw1xg1Xo5A1cJwgQsYra7uCl&id=100064837862450',
         ]
-        url_wl_P.reverse()
+        # url_wl_P.reverse()
 
         url_sy_P=[
             'https://www.xiaohongshu.com/explore/67332b56000000003c017a65?xsec_token=AB8Awd1Iww05bMbIIYTd8Qt4jBzUP3lUbAeSomitF39e8=&xsec_source=pc_search',
@@ -144,8 +155,30 @@ def analysis(side_bar,uploaded_file):
             'https://www.bilibili.com/video/av113472968920192/',
             'https://www.kuaishou.com/short-video/3x7whruh274sd7u',
         ]
-        url_sy_P.reverse()
-        
+        # url_sy_P.reverse()
+               
+        url_zh_P=[
+            'https://weibo.com/2311965983/P006gBJME?refer_flag=1001030103_',
+            'https://weibo.com/5173239667/P04eP4Q4q',
+            'https://weibo.com/6901760711/P03g00GSv?refer_flag=1001030103_',
+            'https://weibo.com/6017039240/P04cuhiBd?refer_flag=1001030103_',
+            'https://weibo.com/7455088119/P00xT1H7d?refer_flag=1001030103_',
+            'https://weibo.com/5634865334/OFWRGeyMJ?refer_flag=1001030103_',
+            'https://weibo.com/2169306777/OFXeBCVzI?refer_flag=1001030103_',
+            'https://weibo.com/1887826062/P000l0gnb?refer_flag=1001030103_',
+            'https://weibo.com/1589147860/OFWQGvbHZ?refer_flag=1001030103_',
+            'https://weibo.com/5160314833/OFWPTs7gS?refer_flag=1001030103_',
+        ]
+        # url_zh_P.reverse()
+
+        url_tb_P=[
+            'https://tieba.baidu.com/p/9268779635?pid=151226288427&cid=0#151226288427',
+            'https://tieba.baidu.com/p/9268779635?pid=151226288427&cid=0#151226288427',
+            'https://tieba.baidu.com/p/9265936538?pid=151217870936&cid=0#151217870936',
+            'https://tieba.baidu.com/p/9268779635?pid=151226288427&cid=0#151226288427',
+        ]
+        # url_tb_P.reverse()
+
         url_hfs_P=[
             'https://weibo.com/7715598783/NibhU6Jrn?refer_flag=1001030103_',
             'https://weibo.com/5336709153/Niyr1rrbP?refer_flag=1001030103_',
@@ -159,7 +192,7 @@ def analysis(side_bar,uploaded_file):
             'https://weibo.com/6436464948/NiaTDpEx8?refer_flag=1001030103_',
 
         ]
-        url_hfs_P.reverse()
+        # url_hfs_P.reverse()
 
         url_yq_P=[
             'https://weibo.com/1989660417/NooQ57FCM?refer_flag=1001030103_',
@@ -173,32 +206,7 @@ def analysis(side_bar,uploaded_file):
             'https://weibo.com/1163218074/NmIPacEzw?refer_flag=1001030103_',
             'https://weibo.com/6859841043/NqhiNbJCi?refer_flag=1001030103_',
         ]
-        url_yq_P.reverse()
-        url_zh_P=[
-            'https://weibo.com/2311965983/P006gBJME?refer_flag=1001030103_',
-            'https://weibo.com/6586305031/P04qrEfhh?refer_flag=1001030103_',
-            'https://weibo.com/6901760711/P03g00GSv?refer_flag=1001030103_',
-            'https://weibo.com/6586305031/P04qrEfhh?refer_flag=1001030103_',
-            'https://weibo.com/5403964641/P00O7r8Tm?refer_flag=1001030103_',
-            'https://weibo.com/5634865334/OFWRGeyMJ?refer_flag=1001030103_',
-            'https://weibo.com/2169306777/OFXeBCVzI?refer_flag=1001030103_',
-            'https://weibo.com/6586305031/P004Kb8eE?refer_flag=1001030103_',
-            'https://weibo.com/7546573234/OFWQMbwA0?refer_flag=1001030103_',
-            'https://weibo.com/7612462543/OFWQBw0oW?refer_flag=1001030103_',
-        ]
-        url_zh_P.reverse()
-        url_wl_N=[
-            'https://facebook.com/story.php?story_fbid=pfbid0HjFrM1YfjkoCuJosRnvaFwdjewhhuhZWc7rAeepVSnoXX5r8cjjSNfLWesCaXnq9l&id=100047112765345',
-            'https://facebook.com/story.php?story_fbid=pfbid02GorNggaiLHTHQxmcgU75btcqA9ScYU1XTQwkAnwDTywL9RT2s7SAbwREYQ5SxSRgl&id=100059422245844',
-            'https://facebook.com/story.php?story_fbid=pfbid024orc55f1qK4po9PY2FYNuwYqi5g43HvemV5DGEQsZUFoo8b34n1kAxwonA8bo13kl&id=100064391875569',
-            'https://facebook.com/story.php?story_fbid=pfbid024orc55f1qK4po9PY2FYNuwYqi5g43HvemV5DGEQsZUFoo8b34n1kAxwonA8bo13kl&id=100064391875569',
-            'https://facebook.com/story.php?story_fbid=pfbid0HDYxDtFyDswmUatSR1NyVRaEvyyWwBYFifWhhvMZfLZTmhzwsJWMnSoKqWB4fSiKl&id=100059551808655',
-            'https://facebook.com/story.php?story_fbid=pfbid03vKo5si5TeykWmq3gS9C53ssSHjAFZ2AmgKiZdt6ejaMkQV73EJmU4wAVAPZodJYl&id=100059422245844',
-            'https://facebook.com/story.php?story_fbid=pfbid0PYApJEuPkoWKwqbCDjwqN1Ur8h2Un4WThityEbPWtBrDq4eg6oVWXf2iERGERYztl&id=100059422245844',
-            'https://facebook.com/story.php?story_fbid=pfbid037WNKpkKWyhgJEpnSjeZ7E7LJkcHozFhyRxJ2ubVWgHv8UdFTJYKCvieJbLmepAeYl&id=100063679001455',
-            'https://facebook.com/story.php?story_fbid=pfbid0MEBdpoET2uYqxR1fLdB3k9do35vYXPPxkHW6t3UiNtCNGrKZY9PnmWJujfxMeg3gl&id=100059479812265',
-            'https://facebook.com/story.php?story_fbid=pfbid08hVxeFE5fQZaQ5R2r4TBM3HyFLbzCMyduJ9sEQiCtdCudygDpykzpAsfzAZJVFHdl&id=100059456532991', 
-        ]
+        # url_yq_P.reverse()
 
         url_hfs_N=[
             'https://weibo.com/3313907053/NiLdBcSji?refer_flag=1001030103_',
@@ -214,6 +222,19 @@ def analysis(side_bar,uploaded_file):
             
         ]
 
+        url_wl_N=[
+            'https://facebook.com/story.php?story_fbid=pfbid0HjFrM1YfjkoCuJosRnvaFwdjewhhuhZWc7rAeepVSnoXX5r8cjjSNfLWesCaXnq9l&id=100047112765345',
+            'https://facebook.com/story.php?story_fbid=pfbid02GorNggaiLHTHQxmcgU75btcqA9ScYU1XTQwkAnwDTywL9RT2s7SAbwREYQ5SxSRgl&id=100059422245844',
+            'https://facebook.com/story.php?story_fbid=pfbid024orc55f1qK4po9PY2FYNuwYqi5g43HvemV5DGEQsZUFoo8b34n1kAxwonA8bo13kl&id=100064391875569',
+            'https://facebook.com/story.php?story_fbid=pfbid024orc55f1qK4po9PY2FYNuwYqi5g43HvemV5DGEQsZUFoo8b34n1kAxwonA8bo13kl&id=100064391875569',
+            'https://facebook.com/story.php?story_fbid=pfbid0HDYxDtFyDswmUatSR1NyVRaEvyyWwBYFifWhhvMZfLZTmhzwsJWMnSoKqWB4fSiKl&id=100059551808655',
+            'https://facebook.com/story.php?story_fbid=pfbid03vKo5si5TeykWmq3gS9C53ssSHjAFZ2AmgKiZdt6ejaMkQV73EJmU4wAVAPZodJYl&id=100059422245844',
+            'https://facebook.com/story.php?story_fbid=pfbid0PYApJEuPkoWKwqbCDjwqN1Ur8h2Un4WThityEbPWtBrDq4eg6oVWXf2iERGERYztl&id=100059422245844',
+            'https://facebook.com/story.php?story_fbid=pfbid037WNKpkKWyhgJEpnSjeZ7E7LJkcHozFhyRxJ2ubVWgHv8UdFTJYKCvieJbLmepAeYl&id=100063679001455',
+            'https://facebook.com/story.php?story_fbid=pfbid0MEBdpoET2uYqxR1fLdB3k9do35vYXPPxkHW6t3UiNtCNGrKZY9PnmWJujfxMeg3gl&id=100059479812265',
+            'https://facebook.com/story.php?story_fbid=pfbid08hVxeFE5fQZaQ5R2r4TBM3HyFLbzCMyduJ9sEQiCtdCudygDpykzpAsfzAZJVFHdl&id=100059456532991', 
+        ]
+
         url_yq_N=[
             'https://weibo.com/5255798521/NbuDxnOgQ?refer_flag=1001030103_',
             'https://weibo.com/1887344341/NpizquEZz?refer_flag=1001030103_',
@@ -226,7 +247,14 @@ def analysis(side_bar,uploaded_file):
             'https://weibo.com/5802446902/NqmO5mNiU?refer_flag=1001030103_',
             'https://weibo.com/7277507691/MFSg2wb8F?refer_flag=1001030103_',
         ]
-        
+
+        url_tb_N=[
+            'https://tieba.baidu.com/p/9265852341?pid=151217675823&cid=0#151217675823',
+            'https://tieba.baidu.com/p/9266533083?pid=151219520561&cid=0#151219520561',
+            'https://tieba.baidu.com/p/9267249804?pid=151221636142&cid=0#151221636142',
+
+        ]
+    
         url_st_P=[
             'https://weibo.com/1731060613/LiLyNhgPY?refer_flag=1001030103_',
             'https://weibo.com/7898673356/NCtga2Xnr',
@@ -239,30 +267,21 @@ def analysis(side_bar,uploaded_file):
             'https://weibo.com/7316590223/LmgkSayjA?refer_flag=1001030103_',
             'https://weibo.com/7833149398/NCtdzrSTM',
         ]
-        url_st_P.reverse()
+        # url_st_P.reverse()
 
-        url_st_N=[
-            'https://weibo.com/7898673356/NCtfSu40C',
-            'https://weibo.com/7898673356/NCtgSckSI',
-            'https://weibo.com/2824412120/LmBx1kzj8?refer_flag=1001030103_',
-            'https://weibo.com/7898673356/NCti6tL8g',
-            'https://weibo.com/7898673356/NCtiA2TyC',
-            'https://weibo.com/2540451950/Lmz0psopM?refer_flag=1001030103_',
-            'https://weibo.com/7898673356/NCtjaF4BL',
-            'https://weibo.com/7898673356/NCtjqDB54','#','#',
-        ]
         url_zh_N=[
-            'https://weibo.com/6310980261/P00h2ye0x?refer_flag=1001030103_',
-            'https://weibo.com/3775056661/OFWrdpLR6?refer_flag=1001030103_',
-            'https://weibo.com/3166052113/P04cVCdG2?refer_flag=1001030103_',
-            'https://weibo.com/7376126187/OFWPbzdGY?refer_flag=1001030103_',
+            'https://weibo.com/7546573234/OFWQMbwA0?refer_flag=1001030103_',
+            'https://weibo.com/2400966427/OFXcWuhNy?refer_flag=1001030103_',
             'https://weibo.com/1566165751/OFWRzrOUC?refer_flag=1001030103_',
-            'https://weibo.com/3775056661/OFWrdpLR6?refer_flag=1001030103_',
-            'https://weibo.com/7612462543/OFWQBw0oW?refer_flag=1001030103_',
-            'https://weibo.com/6622446302/P05jeADMJ?refer_flag=1001030103_',
-            'https://weibo.com/2178514797/P006FnMVu?refer_flag=1001030103_',
-            'https://weibo.com/6524492436/P06igDMNE?refer_flag=1001030103_',
+            'https://weibo.com/2465225522/P065smWWF?refer_flag=1001030103_',
+            'https://weibo.com/7640847916/P006zcEQT?refer_flag=1001030103_',
+            'https://weibo.com/1863031164/P000a7wEO?refer_flag=1001030103_',
+            'https://weibo.com/6320224333/OFWPb18dd?refer_flag=1001030103_',
+            'https://weibo.com/7808803139/OFOwP15oD?refer_flag=1001030103_',
+            'https://weibo.com/1728885132/P01pBrCnw?refer_flag=1001030103_',
+            'https://weibo.com/1218816145/P06v4oJjt?refer_flag=1001030103_',
         ]
+
         url_sy_N=[
             'https://www.kuaishou.com/short-video/3xh7xiik7tebsuc',
             'https://www.kuaishou.com/short-video/3xgd98pqj4v35f4',
@@ -275,6 +294,17 @@ def analysis(side_bar,uploaded_file):
             'https://www.bilibili.com/video/av113463707898329/',
             'https://www.kuaishou.com/short-video/3xf2brbd56t5uw4',
         ]
+     
+        url_st_N=[
+            'https://weibo.com/7898673356/NCtfSu40C',
+            'https://weibo.com/7898673356/NCtgSckSI',
+            'https://weibo.com/2824412120/LmBx1kzj8?refer_flag=1001030103_',
+            'https://weibo.com/7898673356/NCti6tL8g',
+            'https://weibo.com/7898673356/NCtiA2TyC',
+            'https://weibo.com/2540451950/Lmz0psopM?refer_flag=1001030103_',
+            'https://weibo.com/7898673356/NCtjaF4BL',
+            'https://weibo.com/7898673356/NCtjqDB54','#','#',
+        ]
         if "疫情"in uploaded_file.name:
             url_P=url_yq_P
             url_N=url_yq_N 
@@ -285,21 +315,23 @@ def analysis(side_bar,uploaded_file):
         if "三胎" in uploaded_file.name:
             url_P=url_st_P
             url_N=url_st_N
-
         if "网络" in uploaded_file.name:
             url_P=url_wl_P
             url_N=url_wl_N
-
         if "珠海"in uploaded_file.name:
             if "微博" in uploaded_file.name:
                 url_P=url_zh_P
                 url_N=url_zh_N
+            elif "贴吧" in uploaded_file.name:
+                url_P=url_tb_P
+                url_N=url_tb_N 
             elif "所有" in uploaded_file.name:
                 url_P=url_sy_P
                 url_N=url_sy_N 
             else:
                 url_P=st.session_state.url_P
                 url_N=st.session_state.url_N
+
 
         if st.session_state.p2=="正面":
             st.session_state.img=[
@@ -315,7 +347,7 @@ def analysis(side_bar,uploaded_file):
                     'formatter': f'''<div><img src={st.session_state.img[1]} style='width: 240px; height: 200px;'/></div>'''
 
                 },
-                'yAxis': {'triggerEvent': 'true', 'data': title_P},
+                'yAxis': {'triggerEvent': 'true', 'data': title_P, 'inverse': 'true'},
                 'xAxis': {},
                 'series': [{
                     'name': '群体正向情绪',
@@ -353,6 +385,7 @@ def analysis(side_bar,uploaded_file):
             value2=st_echarts(options=option, height='450px', width='650px',events=events2)
             if value2:
                 st.session_state.name=value2
+
 
 
     if side_bar == '群体情绪世界地图':
