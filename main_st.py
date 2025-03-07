@@ -198,6 +198,11 @@ def report_show():
     if "珠海" in st.session_state.file_in.name:
         # reporturl=r"https://drive.google.com/file/d/1BVOOybmUD7Dd6hyKJPRTOC2NALh80Qi5/view?usp=sharing"
         reporturl=r'https://smallpdf.com/cn/file#s=f4c51b8b-2e85-4995-b660-026a49960f8a'
+
+    if "房地产" in st.session_state.file_in.name:
+        # reporturl=r"https://drive.google.com/file/d/1BVOOybmUD7Dd6hyKJPRTOC2NALh80Qi5/view?usp=sharing"
+        reporturl=r'https://smallpdf.com/cn/file#s=42bc2ebf-812a-4396-bab9-3741f2c906fb'
+        
     with open(reportpath1, "rb") as f:
         data = f.read()
         encoded = base64.b64encode(data)
@@ -474,6 +479,12 @@ def main():
                         file_clean="所有平台珠海撞人数据/clean-所有平台珠海撞人数据.csv"  # ------------------------更改点------------------------------
                         downloadfile_name="所有平台珠海撞人数据/clean-所有平台珠海撞人数据.csv"      
                     st.session_state.keyword="珠海"
+                    
+                if '房地产'in keyword:
+                    file_clean="微博房地产政策数据/clean-微博房地产政策数据.csv"  # ------------------------更改点------------------------------
+                    downloadfile_name="clean-微博房地产政策数据.csv"
+                    file_path="微博房地产政策数据"   
+                    st.session_state.keyword="房地产"  
 
                 # path=file_path
                 # # 对字典进行排序
