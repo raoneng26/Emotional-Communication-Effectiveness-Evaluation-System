@@ -207,7 +207,21 @@ def analysis(side_bar,uploaded_file):
             'https://weibo.com/6859841043/NqhiNbJCi?refer_flag=1001030103_',
         ]
         # url_yq_P.reverse()
-
+        
+        url_fdc_P=[
+            'https://weibo.com/6715525032/NhqJ5DiNq',
+            'https://weibo.com/7750822151/O1ukLl3oE',
+            'https://weibo.com/2382064902/O6sRF5ebM',
+            '#',
+            'https://weibo.com/6246658101/Njrzu9IlM',
+            'https://weibo.com/2382726881/N4yfjcztI',
+            'https://weibo.com/3303480313/NgjM6sfzF',
+            'https://weibo.com/2377587254/MrKjwb0gW',
+            '#',
+            'https://weibo.com/1908194624/N7Xy9mESy',
+        ]
+        # url_yq_P.reverse()
+        
         url_hfs_N=[
             'https://weibo.com/3313907053/NiLdBcSji?refer_flag=1001030103_',
             'https://weibo.com/1896892115/NjiUOciIq?refer_flag=1001030103_',
@@ -305,6 +319,20 @@ def analysis(side_bar,uploaded_file):
             'https://weibo.com/7898673356/NCtjaF4BL',
             'https://weibo.com/7898673356/NCtjqDB54','#','#',
         ]
+        
+        url_fdc_N=[
+            'https://weibo.com/1775019491/NrASPozCb',
+            'https://weibo.com/6881597902/Mqrdt4wZN',
+            'https://weibo.com/1618051664/O2QilsVKj',
+            '#',
+            'https://weibo.com/7296341422/P44P7qjqT',
+            'https://weibo.com/1639498782/N6aqBgNfn',
+            '#',
+            '#',
+            'https://weibo.com/2182779452/NloYBBV8g',
+            'https://weibo.com/5802446902/MqqiVyxNl',
+        ]
+        
         if "疫情"in uploaded_file.name:
             url_P=url_yq_P
             url_N=url_yq_N 
@@ -332,7 +360,10 @@ def analysis(side_bar,uploaded_file):
                 url_P=st.session_state.url_P
                 url_N=st.session_state.url_N
 
-
+        if "房地产" in uploaded_file.name:
+            url_P=url_fdc_P
+            url_N=url_fdc_N
+            
         if st.session_state.p2=="正面":
             st.session_state.img=[
                 "https://i.imgur.com/yCpdmbe.png",
@@ -637,15 +668,15 @@ def analysis(side_bar,uploaded_file):
             
         if "房地产" in  uploaded_file.name:
             st.session_state.post_url['2023-01-01']='https://weibo.com/1779837945/MmjdLuMv2'
-            st.session_state.post_url['2024-01-02']='https://weibo.com/1779837945/MmjdLuMv2'
-            st.session_state.post_url['2024-01-03']='https://weibo.com/1779837945/MmjdLuMv2'
-            st.session_state.post_url['2024-01-04']='https://weibo.com/1779837945/MmjdLuMv2'
-            st.session_state.post_url['2024-01-05']='https://weibo.com/1779837945/MmjdLuMv2'
-            st.session_state.post_url['2024-01-06']='https://weibo.com/1779837945/MmjdLuMv2'
-            st.session_state.post_url['2024-01-07']='https://weibo.com/1779837945/MmjdLuMv2'
-            st.session_state.post_url['2024-01-08']='https://weibo.com/1779837945/MmjdLuMv2'
-            st.session_state.post_url['2024-01-09']='https://weibo.com/1779837945/MmjdLuMv2'
-            st.session_state.post_url['2024-01-10']='https://weibo.com/1779837945/MmjdLuMv2'
+            st.session_state.post_url['2023-01-02']='https://weibo.com/1779837945/MmjdLuMv2'
+            st.session_state.post_url['2023-01-03']='https://weibo.com/1779837945/MmjdLuMv2'
+            st.session_state.post_url['2023-01-04']='https://weibo.com/1779837945/MmjdLuMv2'
+            st.session_state.post_url['2023-01-05']='https://weibo.com/1779837945/MmjdLuMv2'
+            st.session_state.post_url['2023-01-06']='https://weibo.com/1779837945/MmjdLuMv2'
+            st.session_state.post_url['2023-01-07']='https://weibo.com/1779837945/MmjdLuMv2'
+            st.session_state.post_url['2023-01-08']='https://weibo.com/1779837945/MmjdLuMv2'
+            st.session_state.post_url['2023-01-09']='https://weibo.com/1779837945/MmjdLuMv2'
+            st.session_state.post_url['2023-01-10']='https://weibo.com/1779837945/MmjdLuMv2'
             
         # colors = ['green' if v > 0 else 'yellow' if v == 0 else 'red' for v in list(dp.values())]
         imageUrls = [
