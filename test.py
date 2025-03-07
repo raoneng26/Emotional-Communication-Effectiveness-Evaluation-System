@@ -634,7 +634,19 @@ def analysis(side_bar,uploaded_file):
             st.session_state.post_url['2024-11-13']='https://www.douyin.com/video/7436650235683753253'
             st.session_state.post_url['2024-11-14']='https://www.bilibili.com/video/av113478656397749/'
             st.session_state.post_url['2024-11-15']='https://www.bilibili.com/video/av113486558467248/'
-
+            
+        if "房地产" in  uploaded_file.name:
+            st.session_state.post_url['2023-01-01']='https://weibo.com/1779837945/MmjdLuMv2'
+            st.session_state.post_url['2024-01-02']='https://weibo.com/1779837945/MmjdLuMv2'
+            st.session_state.post_url['2024-01-03']='https://weibo.com/1779837945/MmjdLuMv2'
+            st.session_state.post_url['2024-01-04']='https://weibo.com/1779837945/MmjdLuMv2'
+            st.session_state.post_url['2024-01-05']='https://weibo.com/1779837945/MmjdLuMv2'
+            st.session_state.post_url['2024-01-06']='https://weibo.com/1779837945/MmjdLuMv2'
+            st.session_state.post_url['2024-01-07']='https://weibo.com/1779837945/MmjdLuMv2'
+            st.session_state.post_url['2024-01-08']='https://weibo.com/1779837945/MmjdLuMv2'
+            st.session_state.post_url['2024-01-09']='https://weibo.com/1779837945/MmjdLuMv2'
+            st.session_state.post_url['2024-01-10']='https://weibo.com/1779837945/MmjdLuMv2'
+            
         # colors = ['green' if v > 0 else 'yellow' if v == 0 else 'red' for v in list(dp.values())]
         imageUrls = [
                 "data_weibo\日本核污水排放\img\1.png",
